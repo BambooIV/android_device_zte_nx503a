@@ -293,7 +293,7 @@ case "$target" in
                 echo "20000 1000000:40000 1600000:20000" > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
                 echo 90 > /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
                 echo 300000 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-                echo 0 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+                echo 1 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
                 echo "80 1000000:85 1600000:95" > /sys/devices/system/cpu/cpufreq/interactive/target_loads
                 echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
                 echo 0 > /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
