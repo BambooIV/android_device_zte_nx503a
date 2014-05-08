@@ -215,6 +215,7 @@ PRODUCT_PACKAGES += \
     init.qcom.sh \
     init.qcom.ssr.sh \
     init.qcom.syspart_fixup.sh \
+    init.qcom.uicc.sh \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.target.rc \
