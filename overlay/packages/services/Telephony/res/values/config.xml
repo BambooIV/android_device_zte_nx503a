@@ -35,6 +35,7 @@
     <!-- Show Preferred Network Type options in No SIM case -->
     <bool name="config_no_sim_display_network_modes">true</bool>
 
-    <bool name="config_enabled_tdscdma" translatable="false">true</bool> 
+    <bool name="config_enabled_tdscdma" translatable="false">true</bool>
+    <bool name="allow_emergency_numbers_in_call_log">true</bool>
 
 </resources>
