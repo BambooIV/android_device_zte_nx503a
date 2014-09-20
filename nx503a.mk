@@ -327,3 +327,11 @@ PRODUCT_COPY_FILES += \
 # Camera2 API
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
+
+# Disable QC Oem Hook
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.oem_socket=false
+
+# Support for graceful UICC Vltg supply deact
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.qcril_uim_vcc_feature=1
