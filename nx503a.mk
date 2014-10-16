@@ -335,3 +335,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Support for graceful UICC Vltg supply deact
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.qcril_uim_vcc_feature=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.no_wait_for_card=1
