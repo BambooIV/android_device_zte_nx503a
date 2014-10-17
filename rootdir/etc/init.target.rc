@@ -50,7 +50,8 @@ on fs
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.
 
-    restorecon /persist
+    restorecon_recursive   /persist
+    mkdir /persist/data 0700 system system
 
 #ADD by wuzehui for the custom file-system
     wait /dev/block/platform/msm_sdcc.1/by-name/customfs
