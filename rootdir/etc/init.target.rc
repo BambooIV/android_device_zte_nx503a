@@ -52,6 +52,8 @@ on fs
 
     restorecon_recursive   /persist
     mkdir /persist/data 0700 system system
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
 
 #ADD by wuzehui for the custom file-system
     wait /dev/block/platform/msm_sdcc.1/by-name/customfs
