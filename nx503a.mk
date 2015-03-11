@@ -320,7 +320,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ril.force_eri_from_xml=true
+    ro.ril.force_eri_from_xml=true \
+    ro.telephony.default_cdma_sub=0
 
 # Disable QC Oem Hook
 PRODUCT_PROPERTY_OVERRIDES += \
