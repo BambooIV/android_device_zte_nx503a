@@ -127,7 +127,6 @@ TARGET_NO_RPC := true
 # Graphics
 BOARD_EGL_CFG := $(LOCAL_PATH)/etc/egl.cfg
 USE_OPENGL_RENDERER := true
-TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 HAVE_ADRENO_SOURCE:= false
