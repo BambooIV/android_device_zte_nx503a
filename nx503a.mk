@@ -316,6 +316,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
 
+# CDMA
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ril.force_eri_from_xml=true
+
 # Disable QC Oem Hook
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.oem_socket=false
