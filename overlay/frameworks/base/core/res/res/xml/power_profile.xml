@@ -12,6 +12,7 @@
     <item name="dsp.video">0.1</item>
     <item name="radio.active">70.79</item>
     <item name="radio.scanning">51.76</item>
+    <item name="camera.flashlight">542.0</item>
     <item name="gps.on">85.79</item>
     <array name="radio.on">
         <value>1.32</value>
