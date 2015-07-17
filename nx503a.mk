@@ -341,4 +341,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.add_power_save=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapminfree=2m
+    dalvik.vm.heapminfree=2m \
+    dalvik.vm.dex2oat-swap=false
