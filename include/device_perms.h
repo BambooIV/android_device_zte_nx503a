@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2012 The Android Open Source Project
- * Copyright (C) 2012 The CyanogenMod Project <http://www.cyanogenmod.org>
+ * Copyright (C) 2012 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +14,11 @@
  * limitations under the License.
  */
 
-#ifndef _BDROID_BUILDCFG_H
-#define _BDROID_BUILDCFG_H
-#define BLUETOOTH_QTI_SW                TRUE
-#define BTM_DEF_LOCAL_NAME   "ZTE NUBIA NX503A"
-// Disables read remote device feature
-#define BTA_SKIP_BLE_READ_REMOTE_FEAT FALSE
-#define MAX_L2CAP_CHANNELS    16
-#define BLE_VND_INCLUDED   TRUE
-// skips conn update at conn completion
-#define BTA_BLE_SKIP_CONN_UPD  FALSE
-#define BLE_PERIPHERAL_ADV_NAME  FALSE
-#endif
+#ifndef DEVICE_PERMS_H
+#define DEVICE_PERMS_H
+
+#define PROPERTY_PERMS_APPEND \
+    { "persist.audio.",   AID_SYSTEM,   0 }, \
+    { "persist.sys.camera.", AID_MEDIA, 0 },
+
+#endif /* DEVICE_PERMS_H */

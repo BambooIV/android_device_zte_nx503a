@@ -41,7 +41,7 @@
 
 /dev/hidg0						u:object_r:usbkeyboard_device:s0
 /dev/hidg1						u:object_r:usbkeyboard_device:s0
-
+/dev/kgsl-3d0       u:object_r:gpu_device:s0
 /dev/bcm2079x                                 u:object_r:nfc_device:s0
 /dev/pn54x                                    u:object_r:nfc_device:s0
 /dev/ttyHSL1                                  u:object_r:ircontrol_device:s0

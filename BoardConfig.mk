@@ -14,30 +14,26 @@
 # limitations under the License.
 
 # inherit from the proprietary version
--include vendor/zte/nx507j/BoardConfigVendor.mk
+-include vendor/zte/nx503a/BoardConfigVendor.mk
 
-LOCAL_PATH := device/zte/nx507j
+LOCAL_PATH := device/zte/nx503a
 
 # Thanks list
-TARGET_RELEASETOOLS_EXTENSIONS 	:= device/zte/nx507j
-
-PRODUCT_COPY_FILES := $(filter-out frameworks/base/data/keyboards/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-	frameworks/base/data/keyboards/Generic.kl:system/usr/keylayout/Generic.kl \
-	frameworks/base/data/keyboards/Generic.kcm:system/usr/keychars/Generic.kcm, $(PRODUCT_COPY_FILES))
-
+TARGET_RELEASETOOLS_EXTENSIONS 	:= device/zte/nx503a
+TARGET_SPECIFIC_HEADER_PATH := device/zte/nx503a/include
 #Disable memcpy_base.S optimization
 TARGET_CPU_MEMCPY_BASE_OPT_DISABLE := true
 
 # QCRIL
 TARGET_RIL_VARIANT := caf
-SIM_COUNT := 2
-TARGET_GLOBAL_CFLAGS += -DANDROID_MULTI_SIM
-TARGET_GLOBAL_CPPFLAGS += -DANDROID_MULTI_SIM
+SIM_COUNT := 1
+#TARGET_GLOBAL_CFLAGS += -DANDROID_MULTI_SIM
+#TARGET_GLOBAL_CPPFLAGS += -DANDROID_MULTI_SIM
 
 COMMON_GLOBAL_CFLAGS += -DQCOM_MEDIA_DISABLE_BUFFER_SIZE_CHECK
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := nx507j,j507NX,nx507J,nx507j,NX507j,z7mini,nx507_mini,nx507,NX507J
+TARGET_OTA_ASSERT_DEVICE := nx503a,j507NX,nx507J,nx503a,NX507j,z7mini,nx507_mini,nx507,NX503A
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
@@ -57,25 +53,31 @@ TARGET_NO_RADIOIMAGE := true
 # Platform
 TARGET_BOARD_PLATFORM := msm8974
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
+TARGET_BOOTLOADER_BOARD_NAME := MSM8974
+TARGET_BOOTLOADER_NAME := nubia
+TARGET_BOARD_INFO_FILE := device/zte/nx503a/board-info.txt
 
+# Keylayout
+PRODUCT_COPY_FILES := $(filter-out frameworks/base/data/keyboards/Generic.kl:system/usr/keylayout/Generic.kl , $(PRODUCT_COPY_FILES))
 # Architecture
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
-#ARCH_ARM_HAVE_ARMV7A := true
-#ARCH_ARM_HAVE_NEON := true
-#ARCH_ARM_HAVE_TLS_REGISTER := true
-#ARCH_ARM_HAVE_VFP := true
-TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
+ARCH_ARM_HAVE_ARMV7A := true
+ARCH_ARM_HAVE_NEON := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
+ARCH_ARM_HAVE_VFP := true
 
 # Flags
-#TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
-#TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
+DTS_NAME := msm8974-v2.2-mtp-NX503A
 # Krait optimizations
 TARGET_USE_KRAIT_BIONIC_OPTIMIZATION:= true
 TARGET_USE_KRAIT_PLD_SET := true
@@ -90,11 +92,11 @@ BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
-TARGET_KERNEL_SOURCE := kernel/zte/nx507j
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x2000000 --tags_offset 0x01E00000 
+TARGET_KERNEL_SOURCE := kernel/zte/nx503a
 TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_CONFIG := msm8974-nx507j_defconfig
-TARGET_zteMT_DTS := true
+TARGET_KERNEL_CONFIG := msm8974-NX503A_defconfig
+TARGET_ZTEMT_DTS := true
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
@@ -174,18 +176,24 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QC_TIME_SERVICES := true
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true
+# Vendor init
+TARGET_INIT_VENDOR_LIB := libinit_msm
+TARGET_LIBINIT_DEFINES_FILE := device/zte/nx503a/init/init_nubia.c
 
 # Wifi
-TARGET_USES_WCNSS_CTRL := true
-BOARD_HAS_QCOM_WLAN := true
-BOARD_WLAN_DEVICE := qcwcn
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
-WIFI_DRIVER_MODULE_NAME := "wlan"
+BOARD_WLAN_DEVICE := bcmdhd
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+
+WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/firmware/bcm4339/fw_bcmdhd.bin nvram_path=/system/etc/firmware/bcm4339/nvram.txt"
+WIFI_DRIVER_MODULE_AP_ARG := "firmware_path=/system/etc/firmware/bcm4339/fw_bcmdhd_apsta.bin nvram_path=/system/etc/firmware/bcm4339/nvram.txt"
+WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA := "/system/etc/firmware/bcm4339/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_AP := "/system/etc/firmware/bcm4339/fw_bcmdhd_apsta.bin"
+WIFI_DRIVER_FW_PATH_P2P := "/system/etc/firmware/bcm4339/fw_bcmdhd_p2p.bin"
 
 # Recovery
 BOARD_SUPPRESS_EMMC_WIPE := true

@@ -1,4 +1,4 @@
-# Copyright (C) 2010 The Android Open Source Project
+# Copyright (C) 2013 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,13 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Key layout used for Bluetooth AVRCP support.
+# Snakebyte
 
-key 200   MEDIA_PLAY          WAKE
-key 201   MEDIA_PAUSE         WAKE
-key 166   MEDIA_STOP          WAKE
-key 163   MEDIA_NEXT          WAKE
-key 165   MEDIA_PREVIOUS      WAKE
-key 168   MEDIA_REWIND        WAKE
-key 208   MEDIA_FAST_FORWARD  WAKE
-key 159   MEDIA_FAST_FORWARD  WAKE
+key 289 BUTTON_A
+key 290 BUTTON_B
+key 288 BUTTON_X
+key 291 BUTTON_Y
+key 292 BUTTON_L1
+key 293 BUTTON_R1
+key 294 BUTTON_L2
+key 295 BUTTON_R2
+key 297 BUTTON_START
+key 296 BUTTON_SELECT
+
+axis 0x00 X
+axis 0x01 Y
+axis 0x02 Z
+axis 0x05 RZ
+axis 0x10 HAT_X
+axis 0x11 HAT_Y

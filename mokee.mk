@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Inherit from nx507j device
-$(call inherit-product, device/zte/nx507j/msm8974.mk)
+# Inherit from nx503a device
+$(call inherit-product, device/zte/nx503a/msm8974.mk)
 
 # Enhanced NFC
 $(call inherit-product, vendor/mk/config/nfc_enhanced.mk)
@@ -21,15 +21,15 @@ $(call inherit-product, vendor/mk/config/nfc_enhanced.mk)
 # Inherit some common MK stuff.
 $(call inherit-product, vendor/mk/config/common_full_phone.mk)
 
-PRODUCT_NAME := mk_nx507j
-PRODUCT_DEVICE := nx507j
+PRODUCT_NAME := mk_nx503a
+PRODUCT_DEVICE := nx503a
 PRODUCT_MANUFACTURER := nubia
-PRODUCT_MODEL := NX507J
+PRODUCT_MODEL := NX503A
 
 PRODUCT_GMS_CLIENTID_BASE := android-zte
 
 PRODUCT_BRAND := nubia
 TARGET_VENDOR := nubia
-TARGET_VENDOR_PRODUCT_NAME := NX507J
-TARGET_VENDOR_DEVICE_NAME := NX507J
-PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=NX507J PRODUCT_NAME=NX507J
+TARGET_VENDOR_PRODUCT_NAME := NX503A
+TARGET_VENDOR_DEVICE_NAME := NX503A
+PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=NX503A PRODUCT_NAME=NX503A
