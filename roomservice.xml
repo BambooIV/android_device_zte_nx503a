@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Please do not manually edit this file-->
+<manifest>
+	<remote name="github"
+          fetch="http://github.com" />
+
+  <project name="mokee/android_device_qcom_common" path="device/qcom/common" remote="github" revision="mkl-mr1" />
+  <project name="mokee/android_hardware_qcom_fm" path="hardware/qcom/fm" remote="github" revision="mkl-mr1" />
+  <project name="xiaognol/android_kernel_zte_nx503a" path="kernel/zte/nx503a" remote="github" revision="mkl-mr1" />
+  <project name="xiaognol/android_vendor_zte_nx503a" path="vendor/zte/nx503a" remote="github" revision="mkl-mr1" />
+  <project name="xiaognol/android_device_zte_nx503a" path="device/zte/nx503a" remote="github" revision="mkl-mr1" />
+</manifest>
