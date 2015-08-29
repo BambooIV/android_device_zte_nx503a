@@ -17,13 +17,8 @@
 
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
-#define BLUETOOTH_QTI_SW                TRUE
-#define BTM_DEF_LOCAL_NAME   "ZTE NUBIA NX503A"
-// Disables read remote device feature
-#define BTA_SKIP_BLE_READ_REMOTE_FEAT FALSE
-#define MAX_L2CAP_CHANNELS    16
-#define BLE_VND_INCLUDED   TRUE
-// skips conn update at conn completion
-#define BTA_BLE_SKIP_CONN_UPD  FALSE
-#define BLE_PERIPHERAL_ADV_NAME  FALSE
+
+#define BTM_DEF_LOCAL_NAME   "Nubia Z5S"
+//#define BTA_DISABLE_DELAY 1000 /* in milliseconds */
+
 #endif

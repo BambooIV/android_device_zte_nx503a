@@ -26,6 +26,7 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
@@ -60,13 +61,23 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 #ADDITIONAL_DEFAULT_PROPERTIES += \
 #    ro.secure=0 \
 #    ro.adb.secure=0
+
+# Bluetooth
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+
+
     
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
+# WiFi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
@@ -99,6 +110,10 @@ PRODUCT_PACKAGES += \
     libxml2 \
     camera.msm8974
 
+# WiFi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/nvram.txt:system/etc/firmware/bcm4339/nvram.txt
+    
 # Connectivity Engine support
 PRODUCT_PACKAGES += \
     libcnefeatureconfig
@@ -163,6 +178,23 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     lights.msm8974
 
+# Flp
+#PRODUCT_PACKAGES += \
+#    flp.default
+    
+# Consummer
+#PRODUCT_PACKAGES += \
+#    consumerir.default
+
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8974
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    vibrator.default
+
+
 # Media
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
@@ -171,12 +203,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/etc/media_profiles.xml:system/etc/media_profiles.xml
 
-# WiFi
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin \
-    $(LOCAL_PATH)/wifi/wifi_info:system/etc/wifi/wifi_info
       
 # country for infrared
 PRODUCT_COPY_FILES += \
@@ -196,6 +222,7 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVdecHevc \
     libOmxVenc \
+    libmm-omxcore \
     libHevcSwDecoder \
     libstagefrighthw \
     qcmediaplayer
@@ -217,15 +244,13 @@ PRODUCT_PACKAGES += \
     init.mdm.sh \
     init.nubia.sh \
     init.nubia.usb.rc \
-    init.qcom.class_core.sh \
-    init.qcom.early_boot.sh \
-    init.qcom.factory.sh \
+    init.zygote32.rc \
+    init.usb.rc \
     init.qcom.rc \
     init.recovery.qcom.rc \
     init.qcom.sh \
-    init.qcom.ssr.sh \
-    init.qcom.syspart_fixup.sh \
     init.qcom.usb.sh \
+    init.trace.rc \
     init.target.rc \
     ueventd.qcom.rc
 
@@ -240,18 +265,26 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    dhcpcd.conf \
-    hostapd.accept \
-    hostapd.deny \
-    hostapd \
-    wpa_supplicant \
-    wpa_supplicant.conf
+    libnetcmdiface \
+    crda \
+    regulatory.bin \
+    linville.key.pub.pem
+
+
+PRODUCT_PACKAGES += \
+	dhcpcd.conf \
+	hostapd \
+	wpa_supplicant \
+	wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
     p2p_supplicant_overlay.conf \
-    wpa_supplicant_overlay.conf \
-    wpa_supplicant_ath6kl.conf
-
+    wpa_supplicant_overlay.conf 
+PRODUCT_PROPERTY_OVERRIDES += \
+	wifi.interface=wlan0 \
+	wifi.supplicant_scan_interval=15 \
+    ro.sys.umsdirtyratio=20
+    
 # ANT+
 PRODUCT_PACKAGES += \
     libantradio \

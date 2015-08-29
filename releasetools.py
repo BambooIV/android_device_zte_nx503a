@@ -17,14 +17,15 @@
 import common
 
 def Thanks(self):
-	self.script.AppendExtra('ui_print("=============================================");')
-	self.script.AppendExtra('ui_print("                   Thanks:                   ");')
-	self.script.AppendExtra('ui_print("             proDOOMman,PaoloW8,Buslik       ");')
-	self.script.AppendExtra('ui_print("=============================================");')
+    self.script.AppendExtra('ui_print("===========================================");')
+    self.script.AppendExtra('ui_print("                  Mokee 5.1");')
+    self.script.AppendExtra('ui_print("===========================================");')
+    self.script.AppendExtra('ui_print("    Author : ZJL");')
+    self.script.AppendExtra('ui_print("===========================================");')
 
 def FullOTA_Assertions(self):
-	Thanks(self)
+    Thanks(self)
 
 def IncrementalOTA_Assertions(self):
-	Thanks(self)
+    Thanks(self)
 

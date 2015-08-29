@@ -15,3 +15,4 @@
 #
 
 add_lunch_combo mk_nx503a-userdebug
+sh device/zte/nx503a/patches/apply.sh

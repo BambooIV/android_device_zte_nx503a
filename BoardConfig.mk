@@ -25,15 +25,18 @@ TARGET_SPECIFIC_HEADER_PATH := device/zte/nx503a/include
 TARGET_CPU_MEMCPY_BASE_OPT_DISABLE := true
 
 # QCRIL
-TARGET_RIL_VARIANT := caf
-SIM_COUNT := 1
+#TARGET_RIL_VARIANT := caf
+#SIM_COUNT := 1
 #TARGET_GLOBAL_CFLAGS += -DANDROID_MULTI_SIM
 #TARGET_GLOBAL_CPPFLAGS += -DANDROID_MULTI_SIM
+BOARD_PROVIDES_LIBRIL :=true
+
 
 COMMON_GLOBAL_CFLAGS += -DQCOM_MEDIA_DISABLE_BUFFER_SIZE_CHECK
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := nx503a,j507NX,nx507J,nx503a,NX507j,z7mini,nx507_mini,nx507,NX503A
+TARGET_RELEASETOOLS_EXTENSIONS := device/zte/nx503a
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
@@ -114,8 +117,9 @@ AUDIO_FEATURE_ENABLED_FM := true
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_QCOM := true
-BLUETOOTH_HCI_USE_MCT := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
+BOARD_BLUEDROID_VENDOR_CONF := device/zte/nx503a/bluetooth/libbt_vndcfg.txt
 
 # Enables Adreno RS driver
 BOARD_EGL_CFG := $(LOCAL_PATH)/etc/egl.cfg
@@ -179,21 +183,24 @@ USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true
 # Vendor init
 TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_LIBINIT_DEFINES_FILE := device/zte/nx503a/init/init_nubia.c
+# Vold
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_MAX_PARTITIONS := 23
 
 # Wifi
-BOARD_WLAN_DEVICE := bcmdhd
-WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_NO_WIFI_HAL := true
+WPA_SUPPLICANT_VERSION      := VER_0_8_X
+BOARD_WLAN_DEVICE           := bcmdhd
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_HOSTAPD_DRIVER        := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_AP      := "/etc/firmware/bcm4339/fw_bcmdhd_apsta.bin"
+WIFI_DRIVER_FW_PATH_STA     := "/etc/firmware/bcm4339/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_P2P     := "/etc/firmware/bcm4339/fw_bcmdhd_p2p.bin"
 
-WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/firmware/bcm4339/fw_bcmdhd.bin nvram_path=/system/etc/firmware/bcm4339/nvram.txt"
-WIFI_DRIVER_MODULE_AP_ARG := "firmware_path=/system/etc/firmware/bcm4339/fw_bcmdhd_apsta.bin nvram_path=/system/etc/firmware/bcm4339/nvram.txt"
-WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA := "/system/etc/firmware/bcm4339/fw_bcmdhd.bin"
-WIFI_DRIVER_FW_PATH_AP := "/system/etc/firmware/bcm4339/fw_bcmdhd_apsta.bin"
-WIFI_DRIVER_FW_PATH_P2P := "/system/etc/firmware/bcm4339/fw_bcmdhd_p2p.bin"
+BOARD_USES_SECURE_SERVICES := true
 
 # Recovery
 BOARD_SUPPRESS_EMMC_WIPE := true
