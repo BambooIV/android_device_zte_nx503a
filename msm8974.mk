@@ -184,7 +184,7 @@ PRODUCT_PACKAGES += \
     
 # Consummer
 #PRODUCT_PACKAGES += \
-#    consumerir.default
+#    consumerir.msm8974
 
 # GPS
 PRODUCT_PACKAGES += \

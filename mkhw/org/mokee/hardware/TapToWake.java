@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
- * Copyright (C) 2014 The MoKee OpenSource Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,19 +18,46 @@ package org.mokee.hardware;
 
 import org.mokee.hardware.util.FileUtils;
 
+import java.io.File;
+
+/**
+ * Tap (usually double-tap) to wake. This *should always* be supported by
+ * the hardware directly. A lot of recent touch controllers have a firmware
+ * option for this
+ */
 public class TapToWake {
 
-    private static String CONTROL_PATH = "/data/tp/easy_wakeup_gesture";
+    private static final String WAKEUP_GESTURE_FILE = "/sys/class/input/input0/wakeup_gesture";
 
+    /**
+     * Whether device supports it
+     *
+     * @return boolean Supported devices must return always true
+     */
     public static boolean isSupported() {
-        return true;
+	    File file = new File(WAKEUP_GESTURE_FILE);
+	    return file.exists();
     }
 
-    public static boolean isEnabled()  {
-        return "0x01".equals(FileUtils.readOneLine(CONTROL_PATH));
+    /**
+     * This method return the current activation state
+     *
+     * @return boolean Must be false when feature is not supported or 
+     * disabled.
+     */
+    public static boolean isEnabled() {
+	    return !FileUtils.readOneLine(WAKEUP_GESTURE_FILE).equals("0x00");
     }
 
-    public static boolean setEnabled(boolean state)  {
-        return FileUtils.writeLine(CONTROL_PATH, (state ? "1" : "0"));
+    /**
+     * This method allows to set activation state
+     *
+     * @param state The new state
+     * @return boolean for on/off, exception if unsupported
+     */
+    
+    public static boolean setEnabled(boolean state) {
+	    return FileUtils.writeLine(WAKEUP_GESTURE_FILE, String.valueOf(state?1:0));
     }
+
 }

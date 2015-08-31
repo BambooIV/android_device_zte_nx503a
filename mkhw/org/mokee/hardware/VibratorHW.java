@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
- * Copyright (C) 2014 The MoKee OpenSource Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,37 +17,30 @@
 package org.mokee.hardware;
 
 import org.mokee.hardware.util.FileUtils;
-import java.io.File;
 
 public class VibratorHW {
-    private static String LEVEL_PATH = "/sys/class/timed_output/vibrator/vtg_level";
-    private static String MAX_PATH = "/sys/class/timed_output/vibrator/vtg_max";
-    private static String MIN_PATH = "/sys/class/timed_output/vibrator/vtg_min";
+
+    private static String LEVEL_PATH = "/sys/class/timed_output/vibrator/wave_value";
 
     public static boolean isSupported() {
-        return new File(LEVEL_PATH).exists();
+        return true;
     }
 
     public static int getMaxIntensity()  {
-        return Integer.parseInt(FileUtils.readOneLine(MAX_PATH));
+        return 51;
     }
-
     public static int getMinIntensity()  {
-        return Integer.parseInt(FileUtils.readOneLine(MIN_PATH));
+        return 47;
     }
-
     public static int getWarningThreshold()  {
-        return -1;
+        return 50;
     }
-
     public static int getCurIntensity()  {
-        return Integer.parseInt(FileUtils.readOneLine(LEVEL_PATH));
+	return Integer.parseInt(FileUtils.readOneLine(LEVEL_PATH));
     }
-
     public static int getDefaultIntensity()  {
-        return getMaxIntensity();
+        return 50;
     }
-
     public static boolean setIntensity(int intensity)  {
         return FileUtils.writeLine(LEVEL_PATH, String.valueOf(intensity));
     }
