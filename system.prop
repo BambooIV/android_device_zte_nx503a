@@ -252,5 +252,8 @@ persist.timed.enable=true
 # Disable mobile-network(first initialization)
 ro.com.android.mobiledata=false
 
+# USB OTG
+persist.sys.isUsbOtgEnabled=true
+
 # Video enhancer (w=low, n=middle, i=high)
 persist.sys.image.enhance=i

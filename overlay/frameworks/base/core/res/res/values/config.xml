@@ -144,7 +144,12 @@
     <!-- If this device is not CDMA this is ignored.  If this list is empty on -->
     <!-- a DUN-requireing CDMA device, the DUN APN will support -->
     <!-- just DUN. -->
-    <array name="config_cdma_dun_supported_types" />
+    <string-array translatable="false" name="config_cdma_dun_supported_types">
+        <item>"default"</item>
+        <item>"dun"</item>
+        <item>"mms"</item>
+        <item>"supl"</item>
+    </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
                   USB interfaces.  If the device doesn't want to support tething over USB this should
@@ -228,7 +233,11 @@
     
     <!-- Configuration to restart radio upon PDP_DEACTIVATE with
          error cause as Regular deactivation(36). -->
-    <bool name="config_radio_reset_on_regular_deactivation">false</bool>
+    <bool name="config_radio_reset_on_regular_deactivation">true</bool>
+
+    <!-- The duration (in milliseconds) that the radio will scan for a signal
+         when there's no network connection. If the scan doesn't timeout, use zero -->
+    <integer name="config_radioScanningTimeout">0</integer>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
@@ -254,7 +263,7 @@
     <bool name="config_lidControlsSleep">true</bool>
 
     <!-- Boolean indicating whether Softap requires reloading AP firmware -->
-    <bool name="config_wifiApFirmwareReload">false</bool>
+    <bool name="config_wifiApFirmwareReload">true</bool>
 
     <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
         on the headphone/microphone jack. When false use the older uevent framework. -->
@@ -326,7 +335,7 @@
     <!-- Default value for proximity check on screen wake
          NOTE ! - Enable for devices that have a fast response proximity sensor (ideally < 300ms)
     -->
-    <bool name="config_proximityCheckOnWake">true</bool>
+    <bool name="config_proximityCheckOnWake">false</bool>
     <integer name="config_proximityCheckTimeout">400</integer>
 
 

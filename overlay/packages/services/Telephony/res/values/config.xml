@@ -30,6 +30,6 @@
     <bool name="config_hardcodeDefaultMobileNetworks">true</bool>
 
 <!-- Flag whether to enable Proximity setting-->
-    <bool name="config_proximity_enable" translatable="false">true</bool>
+    <bool name="config_proximity_enable" translatable="true">true</bool>
 
 </resources>
