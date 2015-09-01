@@ -389,8 +389,8 @@
     <!-- If supported, are dreams enabled? (by default) -->
     <bool name="config_dreamsEnabledByDefault">false</bool>
     
-    <!-- Whether safe headphone volume is enabled or not (country specific). -->
-    <bool name="config_safe_media_volume_enabled">false</bool>
+    <!-- reference volume index for music stream to limit headphone volume and display warning -->
+    <integer name="config_safe_media_volume_index">9</integer>
 
     <!-- Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
