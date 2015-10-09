@@ -33,6 +33,9 @@ on early-init
     chown system system /sys/kernel/debug/kgsl/proc
 
 on init
+    # BoringSSL hacks
+    export LD_PRELOAD "/system/lib/libboringssl-compat.so"
+
     # Set permissions for persist partition
     mkdir /persist 0771 system system
     
