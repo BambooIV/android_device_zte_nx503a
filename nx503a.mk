@@ -130,7 +130,8 @@ PRODUCT_PACKAGES += \
 
 # Compatibility
 PRODUCT_PACKAGES += \
-    libboringssl-compat
+    libboringssl-compat \
+    libshim_qc-opt
 
 # Display
 PRODUCT_PACKAGES += \
