@@ -178,3 +178,6 @@ ro.qc.sdk.izat.service_mask=0x0
 persist.gps.qc_nlp_in_use=0
 #persist.loc.nlp_name=com.qualcomm.services.location
 ro.gps.agps_provider=1
+
+# By default, primary storage is physical
+ro.vold.primary_physical=1
