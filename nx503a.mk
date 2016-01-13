@@ -158,8 +158,7 @@ PRODUCT_PACKAGES += \
     fsck.f2fs \
     mkfs.f2fs \
     make_ext4fs \
-    resize2fs \
-    setup_fs
+    resize2fs
 
 # LOWI
 PRODUCT_COPY_FILES += \
