@@ -32,7 +32,6 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     
 on init
-
     # Set permissions for persist partition
     mkdir /persist 0771 system system
     
@@ -178,16 +177,10 @@ on boot
     write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
-       
-    
+
 #add the haptics sysfs permission
     chown system system /dev/drv2605
     chmod 0660 /dev/drv2605
-
-    #vibrator 
-    chown system system /sys/class/timed_output/vibrator/amp
-    chmod 0666 /sys/class/timed_output/vibrator/amp
-    write /sys/class/timed_output/vibrator/amp 30
 
     # display color calibration
     chown root system /sys/devices/platform/kcal_ctrl.0/kcal
@@ -216,22 +209,7 @@ on boot
 	#lcd enhance
 	chown system system /sys/kernel/lcd_enhance/disptype
 	chmod 0666 /sys/kernel/lcd_enhance/disptype
-	
-	#doubletap2wake
-	chown system system  /sys/android_touch/dt2w
-	chmod 0666  /sys/android_touch/dt2w
-	chown system system  /sys/android_touch/dt2w_duration
-	chmod 0666  /sys/android_touch/dt2w_duration
-	
-	#sweep2wake
-	chown root system  /sys/android_touch/s2w_s2sonly
-	chmod 0666  /sys/android_touch/s2w_s2sonly
-	chown root system  /sys/android_touch/sweep2wake
-	chmod 0666  /sys/android_touch/sweep2wake
-	chown root system  /sys/android_touch/s2w_allow_stroke
-	chmod 0666  /sys/android_touch/s2w_allow_stroke
-	
-	
+
 	# faux sound
 	chown root system  /sys/kernel/sound_control_3/gpl_cam_mic_gain	
 	chown root system  /sys/kernel/sound_control_3/gpl_headphone_gain
@@ -248,29 +226,6 @@ on boot
 	chmod 0666  /sys/kernel/sound_control_3/gpl_speaker_gain
 	chmod 0666  /sys/kernel/sound_control_3/gpl_sound_control_version
 	chmod 0666  /sys/kernel/sound_control_3/gpl_sound_control_locked
-	
-	# gamma
-	chown root system  /sys/module/mdss_dsi_ctrl/kgamma_bn
-	chown root system  /sys/module/mdss_dsi_ctrl/kgamma_bp
-	chown root system  /sys/module/mdss_dsi_ctrl/kgamma_gn
-	chown root system  /sys/module/mdss_dsi_ctrl/kgamma_gp
-	chown root system  /sys/module/mdss_dsi_ctrl/kgamma_rn
-	chown root system  /sys/module/mdss_dsi_ctrl/kgamma_rp
-	chown root system  /sys/module/mdss_dsi_ctrl/kgamma_send
-	chown root system  /sys/module/mdss_dsi_ctrl/kgamma_w
-	
-	chmod 0666  /sys/module/mdss_dsi_ctrl/kgamma_bn	
-	chmod 0666  /sys/module/mdss_dsi_ctrl/kgamma_bp
-	chmod 0666  /sys/module/mdss_dsi_ctrl/kgamma_gn
-	chmod 0666  /sys/module/mdss_dsi_ctrl/kgamma_gp
-	chmod 0666  /sys/module/mdss_dsi_ctrl/kgamma_rn
-	chmod 0666  /sys/module/mdss_dsi_ctrl/kgamma_rp
-	chmod 0666  /sys/module/mdss_dsi_ctrl/kgamma_send
-	chmod 0666  /sys/module/mdss_dsi_ctrl/kgamma_w
-    
-	#ZTEMT add by luochangyang 2013.10.29
-	chown system system /sys/bus/ttsp4/devices/main_ttsp_core.cyttsp4_i2c_adapter/easy_wakeup_gesture
-	#ZTEMT END
     
     # Torch
     chown system camera /sys/class/leds/led:flash_torch/brightness
@@ -502,7 +457,6 @@ on post-fs-data
     mkdir /data/oma 0777
     chmod 0777 /data/oma
     #ZTEDRM end
-    
 
     setprop vold.post_fs_data_done 1
     
@@ -1171,7 +1125,6 @@ service tp_node /system/bin/sh /system/bin/tp_node.sh
     oneshot
 # ZTEMT END
 
-
 #ZTEMT ADD by mayu 2013-9-14 for lcd image enhance
 on property:persist.sys.image.enhance=w
     write /sys/kernel/lcd_enhance/saturation 24
@@ -1190,7 +1143,6 @@ on property:persist.sys.image.colortmp=n
 
 on property:persist.sys.image.colortmp=c
     write /sys/kernel/lcd_enhance/colortmp 26
-
 
 # CM Performance Profiles
 

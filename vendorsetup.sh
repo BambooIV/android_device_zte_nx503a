@@ -14,5 +14,6 @@
 # limitations under the License.
 #
 
-add_lunch_combo mk_nx503a-userdebug
-sh device/zte/nx503a/patches/apply.sh
+add_lunch_combo cm_nx503a-user
+add_lunch_combo cm_nx503a-userdebug
+add_lunch_combo cm_nx503a-eng
