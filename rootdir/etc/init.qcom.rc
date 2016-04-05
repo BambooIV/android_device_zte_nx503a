@@ -459,6 +459,9 @@ on post-fs-data
     #ZTEDRM end
 
     setprop vold.post_fs_data_done 1
+
+    # key disabler
+    chown system system /sys/devices/gpio_keys.85/disabled_keys
     
 # NFC
     setprop ro.nfc.port "I2C"

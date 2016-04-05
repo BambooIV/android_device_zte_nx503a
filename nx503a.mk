@@ -317,6 +317,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/keylayout/Vendor_0a5c_Product_8502.kl:system/usr/keylayout/Vendor_0a5c_Product_8502.kl
 
+# External key layouts
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/etc/set_softkey.sh:system/bin/set_softkey.sh
+
 # Camera2 API
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
