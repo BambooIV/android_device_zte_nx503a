@@ -1015,15 +1015,6 @@ on property:persist.sys.ssr.restart_level=3
     write /sys/bus/msm_subsys/devices/subsys2/restart_level related
     write /sys/bus/msm_subsys/devices/subsys3/restart_level related
 
-# ADDED BY ZTEMT ZhuBing
-# add the gesture on/off init.rc
-on property:persist.sys.gesture=on
-    write /sys/class/gesture/gesture/enable  1
-    
-on property:persist.sys.gesture=off
-    write /sys/class/gesture/gesture/enable  0
-# ADDED BY ZTEMT ZhuBing END
-
 #/* ZTEMT START */
 # Disable download mode when kernel panic
 on property:persist.sys.ap.restart_level=0
@@ -1122,19 +1113,6 @@ on property:persist.service.btcmd=1
 
 on property:persist.service.btcmd=0
     stop  btCommand
-
-# ADDED BY ZTEMT ZhuBing
-# start gesture process
-service gesture /system/bin/tmg3993
-    class main
-# ADDED BY ZTEMT ZhuBing END
-    
-# ZTEMT add by luochangyang 2014.02.11
-#This is for TP node.
-service tp_node /system/bin/sh /system/bin/tp_node.sh
-    class main
-    oneshot
-# ZTEMT END
 
 #ZTEMT ADD by mayu 2013-9-14 for lcd image enhance
 on property:persist.sys.image.enhance=w
