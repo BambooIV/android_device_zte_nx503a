@@ -33,10 +33,6 @@ on early-init
 #ADD by wuzehui for the custom file-system
     mkdir /custom 0755 radio radio
 
-# import cne init file
-on post-fs
-    export LD_PRELOAD /vendor/lib/libNimsWrap.so
-
 on fs
     mount_all fstab.qcom
 	
