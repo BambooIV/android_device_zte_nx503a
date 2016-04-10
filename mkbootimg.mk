@@ -36,7 +36,6 @@ $(INSTALLED_DTIMAGE_TARGET): $(DTBTOOL) $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/u
 	$(hide) $(DTBTOOL) -o $(INSTALLED_DTIMAGE_TARGET) -s $(BOARD_KERNEL_PAGESIZE) -p $(KERNEL_OUT)/scripts/dtc/ $(KERNEL_OUT)/arch/arm/boot/
 	@echo -e ${CL_CYN}"Made DT image: $@"${CL_RST}
 
-ifneq ($(BOARD_CUSTOM_PREBUILT_KERNEL),true)
 ## Overload bootimg generation: Same as the original, + --dt arg
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(INSTALLED_DTIMAGE_TARGET)
 	$(call pretty,"Target boot image: $@")
@@ -52,25 +51,3 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_DTIMAGE_TARGET) \
 	$(hide) $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --dt $(INSTALLED_DTIMAGE_TARGET) --output $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_RECOVERYIMAGE_PARTITION_SIZE),raw)
 	@echo -e ${CL_CYN}"Made recovery image: $@"${CL_RST}
-
-else
-## Overload bootimg generation: Same as the original, + --dt arg
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(INSTALLED_DTIMAGE_TARGET)
-	$(call pretty,"Target boot image: $@")
-	$(hide) mkdir -p $(PRODUCT_OUT)/mkbootimg/
-	$(hide) cp -R $(PRODUCT_OUT)/root/* $(PRODUCT_OUT)/mkbootimg/
-	$(hide) $(MKBOOTFS) $(PRODUCT_OUT)/mkbootimg > $(PRODUCT_OUT)/mkbootimg.cpio
-	$(hide) cat $(PRODUCT_OUT)/mkbootimg.cpio | gzip > $(PRODUCT_OUT)/mkbootimg.fs
-	$(hide) rm -rf $(PRODUCT_OUT)/system/lib/modules/*
-	$(hide) cp -R $(PRODUCT_OUT)/../../../../device/zte/$(TARGET_DEVICE)/prebuilt/modules/* $(PRODUCT_OUT)/system/lib/modules/
-	$(hide) $(MKBOOTIMG) --kernel $(PRODUCT_OUT)/../../../../device/zte/$(TARGET_DEVICE)/prebuilt/kernel --ramdisk $(PRODUCT_OUT)/mkbootimg.fs --cmdline "$(BOARD_KERNEL_CMDLINE)" --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) $(BOARD_MKBOOTIMG_ARGS) --dt $(PRODUCT_OUT)/../../../../device/zte/$(TARGET_DEVICE)/prebuilt/dt.img -o $@
-	@echo -e ${CL_CYN}"Made boot image: $@"${CL_RST}
-
-## Overload recoveryimg generation: Same as the original, + --dt arg
-$(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_DTIMAGE_TARGET) \
-		$(recovery_ramdisk) \
-		$(recovery_kernel)
-	@echo -e ${CL_CYN}"----- Making recovery image ------"${CL_RST}
-	$(hide) $(MKBOOTIMG) --kernel $(PRODUCT_OUT)/../../../../device/zte/$(TARGET_DEVICE)/prebuilt/kernel --ramdisk $(PRODUCT_OUT)/ramdisk-recovery.img --cmdline "$(BOARD_KERNEL_CMDLINE)" --base $(BOARD_KERNEL_BASE) --pagesize $(BOARD_KERNEL_PAGESIZE) $(BOARD_MKBOOTIMG_ARGS) --dt $(PRODUCT_OUT)/../../../../device/zte/$(TARGET_DEVICE)/prebuilt/dt.img -o $@
-	@echo -e ${CL_CYN}"Made recovery image: $@"${CL_RST}
-endif
