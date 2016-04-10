@@ -291,7 +291,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/permissions/com.qualcomm.location.xml:system/etc/permissions/com.qualcomm.location.xml \
     $(LOCAL_PATH)/etc/quipc.conf:system/etc/quipc.conf \
     $(LOCAL_PATH)/etc/sap.conf:system/etc/sap.conf \
-    $(LOCAL_PATH)/etc/sensor_def_qcomdev.conf:system/etc/sensor_def_qcomdev.conf \
     $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf \
     $(LOCAL_PATH)/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
 
