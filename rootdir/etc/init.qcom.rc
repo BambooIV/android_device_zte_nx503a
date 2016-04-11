@@ -36,19 +36,18 @@ on init
     mkdir /persist 0771 system system
     
     #External storage directories
-    mkdir /mnt/media_rw/sdcard 0775 system system
-    mkdir /mnt/media_rw/usbdisk 0775 system system
+    mkdir /mnt/media_rw/sdcard0 0775 system system
+    mkdir /mnt/media_rw/usba 0775 system system
 
-    mkdir /storage/sdcard 0000 system system
-    mkdir /storage/usbdisk 0000 system system
+    mkdir /storage/sdcard0 0000 system system
+    mkdir /storage/usba 0000 system system
 
     # for backwards compatibility
-    symlink /storage/sdcard /sdcard
-    symlink /storage/sdcard /mnt/sdcard
-    symlink /storage/usbdisk /usbdisk
-    symlink /storage/usbdisk /mnt/usbdisk
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
 
-    export EXTERNAL_STORAGE  /storage/sdcard
+    export EXTERNAL_STORAGE  /storage/sdcard0
+    export OTG_STORAGE /storage/usba
     
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
@@ -971,18 +970,22 @@ service profiler_daemon /system/bin/profiler_daemon
     group root
     disabled
 
-service fuse_sdcard /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard /storage/sdcard
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
     class late_start
     disabled
 
-service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
     class late_start
     disabled
 
+service fuse_usba /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usba /storage/usba
+    class late_start
+    disabled
 
-service charger /charger
-    class charger
-    
+service fuse_usbb /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbb /storage/usbb
+    class late_start
+    disabled
+
 service hcidump /system/bin/sh /system/etc/hcidump.sh
     user bluetooth
     group bluetooth system net_bt_admin net_admin
