@@ -197,16 +197,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fstab.qcom \
     init.class_main.sh \
-    init.mdm.sh \
     init.nubia.sh \
     init.nubia.usb.rc \
-    init.zygote32.rc \
-    init.usb.rc \
+    init.qcom.class_core.sh \
+    init.qcom.factory.sh \
     init.qcom.rc \
-    init.recovery.qcom.rc \
     init.qcom.sh \
     init.qcom.usb.sh \
-    init.trace.rc \
     init.target.rc \
     ueventd.qcom.rc
 
