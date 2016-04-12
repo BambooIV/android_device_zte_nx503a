@@ -214,6 +214,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal config
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/etc/thermald-8974.conf:system/etc/thermald-8974.conf \
     $(LOCAL_PATH)/etc/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf \
     $(LOCAL_PATH)/etc/thermal-engine-8974pro.conf:system/etc/thermal-engine-8974pro.conf
 
@@ -280,19 +281,21 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/hsic.control.bt.sh:system/etc/hsic.control.bt.sh \
     $(LOCAL_PATH)/etc/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
     $(LOCAL_PATH)/etc/init.crda.sh:system/etc/init.crda.sh \
-    $(LOCAL_PATH)/etc/init.qcom.uicc.sh:system/etc/init.qcom.uicc.sh \
     $(LOCAL_PATH)/etc/init.qcom.audio.sh:system/etc/init.qcom.audio.sh \
     $(LOCAL_PATH)/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
     $(LOCAL_PATH)/etc/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
     $(LOCAL_PATH)/etc/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
     $(LOCAL_PATH)/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+    $(LOCAL_PATH)/etc/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
     $(LOCAL_PATH)/etc/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
     $(LOCAL_PATH)/etc/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
     $(LOCAL_PATH)/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
     $(LOCAL_PATH)/etc/izat.conf:system/etc/izat.conf \
     $(LOCAL_PATH)/etc/permissions/com.qualcomm.location.xml:system/etc/permissions/com.qualcomm.location.xml \
+    $(LOCAL_PATH)/etc/qca6234-service.sh:system/etc/qca6234-service.sh \
     $(LOCAL_PATH)/etc/quipc.conf:system/etc/quipc.conf \
     $(LOCAL_PATH)/etc/sap.conf:system/etc/sap.conf \
+    $(LOCAL_PATH)/etc/usf_post_boot.sh:system/etc/usf_post_boot.sh \
     $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf \
     $(LOCAL_PATH)/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
 
