@@ -163,22 +163,19 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/media_codecs_8974.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/etc/media_profiles_8974.xml:system/etc/media_profiles.xml
     
-# OMX
+# Media
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libdashplayer \
     libdivxdrmdecrypt \
+    libdashplayer \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
-    libOmxMux \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVdecHevc \
     libOmxVenc \
-    libmm-omxcore \
-    libHevcSwDecoder \
     libstagefrighthw \
     qcmediaplayer
 
