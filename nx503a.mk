@@ -318,6 +318,15 @@ PRODUCT_COPY_FILES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=/vendor/lib/libqc-opt.so \
+    persist.radio.apm_sim_not_pwdn=1 \
+    ro.com.google.clientidbase=android-zte \
+    ro.com.google.clientidbase.ms=android-zte \
+    ro.com.google.clientidbase.am=android-zte \
+    ro.com.google.clientidbase.gmm=android-zte \
+    ro.com.google.clientidbase.yt=android-zte \
+
 # CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.force_eri_from_xml=true
