@@ -145,6 +145,7 @@ vendor/lib/libAKM8963.so
 vendor/lib/libC2D2.so
 vendor/lib/libCB.so
 vendor/lib/libCommandSvc.so
+vendor/lib/libDivxDrm.so
 vendor/lib/libFileMux.so
 vendor/lib/libHevcSwDecoder.so
 vendor/lib/libI420colorconvert.so
@@ -156,6 +157,7 @@ vendor/lib/libOmxWmaDec.so
 vendor/lib/libOpenCL.so
 vendor/lib/libQSEEComAPI.so
 vendor/lib/libRSDriver_adreno.so
+vendor/lib/libSHIMDivxDrm.so
 vendor/lib/libSecureUILib.so
 vendor/lib/libStDrvInt.so
 vendor/lib/libSubSystemShutdown.so
@@ -486,6 +488,7 @@ vendor/lib/libmmipstreamnetwork.so
 vendor/lib/libmmipstreamsourcehttp.so
 vendor/lib/libmmipstreamutils.so
 vendor/lib/libmmjpeg.so
+vendor/lib/libmmosal.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/libmmrtpdecoder.so
 vendor/lib/libmmrtpencoder.so
