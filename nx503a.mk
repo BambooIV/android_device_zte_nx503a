@@ -70,7 +70,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/data/auto_pairing.conf:system/etc/bluetooth/auto_pairing.conf \
     $(LOCAL_PATH)/bluetooth/data/blacklist.conf:system/etc/bluetooth/blacklist.conf \
     $(LOCAL_PATH)/bluetooth/data/input.conf:system/etc/bluetooth/input.conf \
-    $(LOCAL_PATH)/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf \
+    $(LOCAL_PATH)/bluetooth/data/main.conf:system/etc/bluetooth/main.conf \
     $(LOCAL_PATH)/bluetooth/data/network.conf:system/etc/bluetooth/network.conf \
 
 # Boot animation
