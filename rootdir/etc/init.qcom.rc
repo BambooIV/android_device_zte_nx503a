@@ -36,20 +36,15 @@ on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
     
-    # ZTEMT: Modified
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /storage/sdcard0 0700 system system
-    #mkdir /storage/sdcard1 0700 system system
     mkdir /storage/usba 0700 system system
-    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
-    #mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /mnt/media_rw/usba 0700 media_rw media_rw
-    export EXTERNAL_STORAGE /storage/sdcard0
-    #export SECONDARY_STORAGE /storage/sdcard1
+
+    export EXTERNAL_STORAGE /sdcard
     export OTG_STORAGE /storage/usba
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-    # ZTEMT: Modified End
+
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -202,9 +197,6 @@ on post-fs-data
 
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/misc/camera 0770 camera camera
-
-    mkdir /data/media 0770 media_rw media_rw
-    chown media_rw media_rw /data/media
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
@@ -899,10 +891,6 @@ service profiler_daemon /system/bin/profiler_daemon
     class late_start
     user root
     group root
-    disabled
-
-service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
-    class late_start
     disabled
 
 service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
