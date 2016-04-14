@@ -31,7 +31,6 @@ bin/qosmgr
 bin/qseecomd
 bin/radish
 bin/rfs_access
-bin/rild
 bin/rmt_storage
 bin/sensors.qcom
 bin/subsystem_ramdump
@@ -112,7 +111,6 @@ lib/libmorpho_jpeg_io.so
 lib/libmorpho_memory_allocator.so
 lib/libqomx_core.so
 lib/libqsap_sdk.so
-lib/libril.so
 
 # Vendor Lib
 vendor/firmware/bcm4339.hcd
