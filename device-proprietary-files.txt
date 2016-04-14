@@ -4,13 +4,8 @@ app/TimeService.apk
 # Bin
 bin/ATFWD-daemon
 bin/adsprpcd
-bin/bridgemgrd
 bin/btCommand
 bin/btnvtool
-bin/diag_klog
-bin/diag_mdlog
-bin/ds_fmc_appd
-bin/efsks
 bin/fmconfig
 bin/gsiff_daemon
 bin/ims_rtp_daemon
@@ -22,18 +17,12 @@ bin/mm-qcamera-app
 bin/mm-qcamera-daemon
 bin/mpdecision
 bin/netmgrd
-bin/nl_listener
-bin/port-bridge
-bin/qcks
-bin/qmiproxy
 bin/qmuxd
-bin/qosmgr
 bin/qseecomd
 bin/radish
 bin/rfs_access
 bin/rmt_storage
 bin/sensors.qcom
-bin/subsystem_ramdump
 bin/thermal-engine
 bin/time_daemon
 bin/tmg3993
@@ -74,7 +63,6 @@ etc/firmware/wlan/prima/WCNSS_cfg.dat
 etc/mobilenuminmainland.db
 etc/permissions/com.google.android.media.effects.xml
 etc/permissions/com.google.widevine.software.drm.xml
-etc/qosmgr_rules.xml
 etc/sensor_def_qcomdev.conf
 
 # lIB
