@@ -144,7 +144,7 @@ TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Override healthd HAL
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.qcom
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.msm
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
