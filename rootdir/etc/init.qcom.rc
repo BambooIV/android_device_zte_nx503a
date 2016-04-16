@@ -38,12 +38,6 @@ on init
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-    
-    mkdir /storage/usba 0700 system system
-    mkdir /mnt/media_rw/usba 0700 media_rw media_rw
-
-    export EXTERNAL_STORAGE /sdcard
-    export OTG_STORAGE /storage/usba
 
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
@@ -902,18 +896,6 @@ service profiler_daemon /system/bin/profiler_daemon
     class late_start
     user root
     group root
-    disabled
-
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
-service fuse_usba /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usba /storage/usba
-    class late_start
-    disabled
-
-service fuse_usbb /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbb /storage/usbb
-    class late_start
     disabled
 
 service hcidump /system/bin/sh /system/etc/hcidump.sh
