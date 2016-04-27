@@ -104,6 +104,7 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
+    libqcomvoiceprocessingdescriptors \
     tinymix
 
 # Audio configuration
@@ -198,6 +199,17 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw
+    
+# Compatibility with older blobs
+PRODUCT_PACKAGES += \
+    libstlport
+    
+# Extended media support
+PRODUCT_PACKAGES += \
+    qcmediaplayer
+
+PRODUCT_BOOT_JARS += \
+    qcmediaplayer
 
 # Power
 PRODUCT_PACKAGES += \
