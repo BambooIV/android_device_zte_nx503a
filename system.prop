@@ -1,5 +1,8 @@
-# RIL
-rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
+#
+# system.prop for msm8974
+#
+
+rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
@@ -13,19 +16,10 @@ persist.rild.nitz_short_ons_3=
 #added by wanghaiqing 2014/04/14
 
 #added end
-#ro.telephony.ril_class=ZTEQualcommUiccRIL
-#ro.telephony.ril.v3=qcomdsds
-persist.radio.mode_pref_nv10=1
-ro.ril.enable.dtm = 0
-persist.telephony.oosisdc=false
-ril.data.bootingpopup=0
 ril.subscription.types=NV,RUIM
-ro.ril.force_eri_from_xml=true
 DEVICE_PROVISIONED=1
-
 # Start in global mode
-ro.telephony.default_cdma_sub=0
-ro.telephony.default_network=21
+ro.telephony.default_network=7
 #added by wanghaiqing 2014/04/17  card2 defaultnetwork
 ro.telephony.default_network_1=1
 #added end
@@ -33,13 +27,13 @@ debug.sf.hw=1
 debug.egl.hw=1
 debug.composition.type=c2d
 persist.hwc.mdpcomp.enable=true
-debug.mdpcomp.4k2kSplit=1
 debug.mdpcomp.logs=0
+# luochangyang 2014/03/12
 ro.sf.lcd_density=480
-persist.sys.strictmode.disable=true
+# luochangyang END
+dalvik.vm.heapsize=36m
 dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
-
 
 ro.hdmi.enable=true
 persist.speaker.prot.enable=false
@@ -60,9 +54,9 @@ media.stagefright.enable-scan=true
 mmp.enable.3g2=true
 mm.enable.smoothstreaming=true
 media.aac_51_output_enabled=true
-#37491 is decimal sum of supported codecs in AAL
-#codecs: AVI AC3 ASF AAC QCP DTS 3G2 MP2TS
-mm.enable.qcom_parser=37491
+
+# Default to AwesomePlayer
+media.stagefright.use-awesome=true
 
 # VIDC: debug_levels
 # 1:ERROR 2:HIGH 4:LOW 0:NOLOGS 7:AllLOGS
@@ -71,10 +65,8 @@ vidc.debug.level=1
 # system props for the data modules
 #
 ro.use_data_netmgrd=true
+persist.data.netmgrd.qos.enable=true
 ro.data.large_tcp_window_size=true
-
-#Disable netmgr QoS, because it not supported in CM
-persist.data.netmgrd.qos.enable=false
 
 #system props for time-services
 persist.timed.enable=true
@@ -105,17 +97,13 @@ ro.bluetooth.alwaysbleon=true
 
 #Simulate sdcard on /data/media
 #
+#persist.fuse_sdcard=true
 persist.fuse_sdcard=false
 
 #
 #snapdragon value add features
 #
 ro.qc.sdk.audio.ssr=false
-
-# Dual mic
-persist.audio.dualmic.config=endfire
-persist.audio.handset.mic.type=digital
-
 ##fluencetype can be "fluence" or "fluencepro" or "none"
 ro.qc.sdk.audio.fluencetype=fluence
 persist.audio.fluence.voicecall=true
@@ -125,6 +113,10 @@ persist.audio.fluence.speaker=false
 ro.qc.sdk.sensors.gestures=true
 ro.qc.sdk.gestures.camera=false
 ro.qc.sdk.camera.facialproc=false
+persist.camera.tintless=enable
+persist.camera.4k2k.enable=1
+# system prop for NFC DT
+ro.nfc.port=I2C
 #property to enable user to access Google WFD settings.
 persist.debug.wfd.enable=1
 #property to choose between virtual/external wfd display
@@ -134,28 +126,25 @@ persist.sys.wfd.wpssetup.type=1
 #property to set wfd output resolution is 1080P(0) / 720P(1) / 960*540(2) / 800*480(3)
 persist.sys.wfd.zte_resolution=2
 #property to show wfd sink false(0) / true(1)
-persist.sys.wfd.zsink_support=1
+persist.sys.wfd.zsink_support=0
 #property this is device support wfd 1080p output support(true)  not support(false)
 persist.sys.wfd.1080p_support=true
 
-tunnel.audio.encode = true
+#property to set wlan suspend optimization
+#false: disable suspend optimization
+#true : enable suspend optimization
+persist.sys.wlan.optimize=false
 
-#use VERY_HIGH_QUALITY for audio resampler
-af.resampler.quality=4
+tunnel.audio.encode = false
 
 #Buffer size in kbytes for compress offload playback
 audio.offload.buffer.size.kb=32
 
-#ztemt add for wifi device
-persist.sys.wifi.p2pname=ZTE Z5S
-persist.sys.wifi.softapname=ZTE Z5S
-
 #Enable offload audio video playback by default
-av.offload.enable=true
-av.streaming.offload.enable=true
+audio.offload.video=true
 
 #enable voice path for PCM VoIP by default
-use.voice.path.for.pcm.voip=false
+use.voice.path.for.pcm.voip=true
 
 #hwui properties
 ro.hwui.texture_cache_size=72
@@ -181,77 +170,16 @@ persist.factory.mic_number=13
 #Dolby DS1 DOLBY_UDC
 dmid=3067269873
 
-# WiFi
-wifi.interface=wlan0
-wifi.supplicant_scan_interval=240
-ro.sys.umsdirtyratio=20
+#property to support SSR && AP RESET when kernel panic.(1,1) to disable, (3,0) to enable
+persist.sys.ssr.restart_level=3
+persist.sys.ap.restart_level=0
 
-# Set default USB interface
-persist.sys.usb.config=mtp,adb
+#add bt mac addr
+ro.bt.bdaddr_path=/persist/.bt_nv.bin
 
-# DPI
-ro.sf.lcd_density=480
-
-# Chip name
-ro.chipname=msm8974
-
-#Vendor lib
-ro.vendor.extension_library=/vendor/lib/libqc-opt.so
-
-# Do not power down SIM card when modem is sent to Low Power Mode.
-persist.radio.apm_sim_not_pwdn=1
-
-# Upto 3 layers can go through overlays
-com.qc.hardware=true
-
-# Disable error check
-ro.kernel.android.checkjni=0
-
-dalvik.vm.heapstartsize=8m
-dalvik.vm.heapgrowthlimit=192m
-dalvik.vm.heapsize=512m
-dalvik.vm.heaptargetutilization=0.75
-dalvik.vm.heapminfree=512k
-dalvik.vm.heapmaxfree=8m
-ro.bluetooth.ftm_enabled=true
-persist.factory.keypad_type=standard_with_camera_with_focus
-persist.factory.receiver_volume=10
-persist.factory.loopback_volume=12
-drm.service.enabled=true
-ro.ireader.channel=109188
-audio.effect.name=dolby
-persist.sys.singlehand=1
-ro.qc.sdk.izat.premium_enabled=1
-ro.qc.sdk.izat.service_mask=0x5
+# GPS
+ro.qc.sdk.izat.premium_enabled=0
+ro.qc.sdk.izat.service_mask=0x0
 persist.gps.qc_nlp_in_use=0
 #persist.loc.nlp_name=com.qualcomm.services.location
 ro.gps.agps_provider=1
-
-# Radio
-persist.radio.adb_log_on=1
-persist.radio.add_power_save=1
-persist.radio.apm_sim_not_pwdn=1
-persist.radio.fill_eons=1 
-persist.radio.kickstart=on
-persist.radio.mode_pref_nv10=1
-persist.radio.prefer_spn=2
-persist.radio.snapshot_disabled=1
-persist.radio.tdscdma_present=2
-persist.radio.use_se_table_only=1 
-ril.data.bootingpopup=0
-ril.ipv6.rmnet0.enable=0
-persist.telephony.oosisdc=false
-ro.ril.enable.dtm = 0
-ro.ril.transmitpower=true
-
-# Time
-persist.timed.enable=true
-
-# Disable mobile-network(first initialization)
-ro.com.android.mobiledata=false
-
-# USB OTG
-persist.sys.isUsbOtgEnabled=true
-
-# Video enhancer (w=low, n=middle, i=high)
-persist.sys.image.enhance=i

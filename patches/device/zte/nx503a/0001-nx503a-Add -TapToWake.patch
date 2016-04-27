@@ -1,0 +1,348 @@
+From d058dcae1d87a33e700ad4dfb91db68b518d100b Mon Sep 17 00:00:00 2001
+From: BambooIV <ningdisheng@gmail.com>
+Date: Tue, 12 Apr 2016 15:26:36 +0800
+Subject: [PATCH] nx503a: Add TapToWake
+
+---
+ cmhw/org/cyanogenmod/hardware/TapToWake.java       |  36 +++++++
+ etc/tp_node.sh                                     | 107 +++++++++++++++++++++
+ keyhandler/Android.mk                              |  10 ++
+ .../cyanogenmod/settings/device/KeyHandler.java    |  75 +++++++++++++++
+ nx503a.mk                                          |  10 +-
+ .../frameworks/base/core/res/res/values/config.xml |   8 ++
+ rootdir/etc/init.qcom.rc                           |  15 +++
+ 7 files changed, 260 insertions(+), 1 deletion(-)
+ create mode 100644 cmhw/org/cyanogenmod/hardware/TapToWake.java
+ create mode 100755 etc/tp_node.sh
+ create mode 100644 keyhandler/Android.mk
+ create mode 100644 keyhandler/src/com/cyanogenmod/settings/device/KeyHandler.java
+
+diff --git a/cmhw/org/cyanogenmod/hardware/TapToWake.java b/cmhw/org/cyanogenmod/hardware/TapToWake.java
+new file mode 100644
+index 0000000..76a6541
+--- /dev/null
++++ b/cmhw/org/cyanogenmod/hardware/TapToWake.java
+@@ -0,0 +1,36 @@
++/*
++ * Copyright (C) 2014 The CyanogenMod Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++package org.cyanogenmod.hardware;
++
++import org.cyanogenmod.hardware.util.FileUtils;
++
++public class TapToWake {
++
++    private static String CONTROL_PATH = "/data/tp/easy_wakeup_gesture";
++
++    public static boolean isSupported() {
++        return true;
++    }
++
++    public static boolean isEnabled()  {
++        return "0x01".equals(FileUtils.readOneLine(CONTROL_PATH));
++    }
++
++    public static boolean setEnabled(boolean state)  {
++        return FileUtils.writeLine(CONTROL_PATH, (state ? "1" : "0"));
++    }
++}
+diff --git a/etc/tp_node.sh b/etc/tp_node.sh
+new file mode 100755
+index 0000000..df001cf
+--- /dev/null
++++ b/etc/tp_node.sh
+@@ -0,0 +1,107 @@
++#! /bin/sh
++
++if [ ! -d "/data/tp" ]; then
++    mkdir /data/tp
++    chmod 0775 /data/tp
++    chown system:system /data/tp
++else
++    rm /data/tp/*
++fi
++
++# Goodix GT915L
++
++if [ -e "/sys/bus/i2c/devices/2-005d/ic_ver" ]; then
++	ln -s /sys/bus/i2c/devices/2-005d/ic_ver /data/tp/ic_ver
++fi
++
++if [ -e "/sys/bus/i2c/devices/2-005d/wakeup_gesture" ]; then
++	chown system:system /sys/bus/i2c/devices/2-005d/wakeup_gesture
++	ln -s /sys/bus/i2c/devices/2-005d/wakeup_gesture /data/tp/easy_wakeup_gesture
++fi
++
++if [ -e "/sys/gtp_test/opentest" ]; then
++    ln -s "sys/gtp_test/opentest" /data/tp/ic_detect
++fi
++
++# ==============================================================================
++# Cypress TMA463
++
++if [ -e "/sys/bus/ttsp4/devices/main_ttsp_core.cyttsp4_i2c_adapter/ic_ver" ]; then
++	ln -s /sys/bus/ttsp4/devices/main_ttsp_core.cyttsp4_i2c_adapter/ic_ver /data/tp/ic_ver
++fi
++
++if [ -e "/sys/bus/ttsp4/devices/cyttsp4_device_access.main_ttsp_core/ic_grpdetect" ]; then
++	ln -s /sys/bus/ttsp4/devices/cyttsp4_device_access.main_ttsp_core/ic_grpdetect /data/tp/ic_detect
++fi
++
++if [ -e "/sys/bus/ttsp4/devices/cyttsp4_loader.main_ttsp_core/manual_cali" ]; then
++	ln -s /sys/bus/ttsp4/devices/cyttsp4_loader.main_ttsp_core/manual_cali /data/tp/manual_cali
++fi
++
++if [ -e "/sys/bus/ttsp4/devices/cyttsp4_loader.main_ttsp_core/fw_upgrade_flag" ]; then
++	ln -s /sys/bus/ttsp4/devices/cyttsp4_loader.main_ttsp_core/fw_upgrade_flag /data/tp/fw_upgrade_flag
++fi
++
++if [ -e "/sys/bus/ttsp4/devices/main_ttsp_core.cyttsp4_i2c_adapter/easy_wakeup_gesture" ]; then
++	chown system:system /sys/bus/ttsp4/devices/main_ttsp_core.cyttsp4_i2c_adapter/easy_wakeup_gesture
++	ln -s /sys/bus/ttsp4/devices/main_ttsp_core.cyttsp4_i2c_adapter/easy_wakeup_gesture /data/tp/easy_wakeup_gesture
++fi
++
++# ==============================================================================
++# Synaptics S3208 S3508
++
++if [ -e "/sys/class/input/input0/buildid" ]; then
++	ln -s /sys/class/input/input0/buildid /data/tp/ic_ver
++fi
++
++if [ -e "/sys/class/input/input0/reset" ]; then
++	ln -s /sys/class/input/input0/reset /data/tp/reset
++fi
++
++if [ -e "/sys/class/input/input0/wakeup_gesture" ]; then
++	chown system:system /sys/class/input/input0/wakeup_gesture
++	ln -s /sys/class/input/input0/wakeup_gesture /data/tp/easy_wakeup_gesture
++fi
++
++if [ -e "/sys/class/input/input0/f54/factory_result" ]; then
++	ln -s /sys/class/input/input0/f54/factory_result /data/tp/ic_detect
++fi
++
++# ==============================================================================
++# Cypress TMA568
++
++if [ -e "/sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/ic_ver" ]; then
++	ln -s /sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/ic_ver /data/tp/ic_ver
++fi
++
++if [ -e "/sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/hw_reset" ]; then
++	ln -s /sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/hw_reset /data/tp/reset
++fi
++
++if [ -e "/sys/bus/ttsp5/devices/cyttsp5_device_access.main_ttsp_core/ic_detect" ]; then
++	ln -s /sys/bus/ttsp5/devices/cyttsp5_device_access.main_ttsp_core/ic_detect /data/tp/ic_detect
++fi
++
++if [ -e "/sys/bus/ttsp5/devices/cyttsp5_loader.main_ttsp_core/manual_cali" ]; then
++	ln -s /sys/bus/ttsp5/devices/cyttsp5_loader.main_ttsp_core/manual_cali /data/tp/manual_cali
++fi
++
++if [ -e "/sys/bus/ttsp5/devices/cyttsp5_loader.main_ttsp_core/fw_upgrade_flag" ]; then
++	ln -s /sys/bus/ttsp5/devices/cyttsp5_loader.main_ttsp_core/fw_upgrade_flag /data/tp/fw_upgrade_flag
++fi
++
++if [ -e "/sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/easy_wakeup_gesture" ]; then
++	chown system:system /sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/easy_wakeup_gesture
++	ln -s /sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/easy_wakeup_gesture /data/tp/easy_wakeup_gesture
++fi
++
++if [ -e "/sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/touch_mode" ]; then
++	chown system:system /sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/touch_mode
++	ln -s /sys/bus/ttsp5/devices/main_ttsp_core.cyttsp5_i2c_adapter/touch_mode /data/tp/touch_mode
++fi
++
++if [ -e "/sys/bus/ttsp5/devices/cyttsp5_mt.main_ttsp_core/hall_mode" ]; then
++	chown system:system /sys/bus/ttsp5/devices/cyttsp5_mt.main_ttsp_core/hall_mode
++	ln -s /sys/bus/ttsp5/devices/cyttsp5_mt.main_ttsp_core/hall_mode /data/tp/hall_mode
++fi
++
+diff --git a/keyhandler/Android.mk b/keyhandler/Android.mk
+new file mode 100644
+index 0000000..91c3fac
+--- /dev/null
++++ b/keyhandler/Android.mk
+@@ -0,0 +1,10 @@
++LOCAL_PATH:= $(call my-dir)
++
++include $(CLEAR_VARS)
++
++LOCAL_MODULE := com.cyanogenmod.keyhandler
++LOCAL_SRC_FILES := $(call all-java-files-under,src)
++LOCAL_MODULE_TAGS := optional
++
++include $(BUILD_JAVA_LIBRARY)
++
+diff --git a/keyhandler/src/com/cyanogenmod/settings/device/KeyHandler.java b/keyhandler/src/com/cyanogenmod/settings/device/KeyHandler.java
+new file mode 100644
+index 0000000..e592bfe
+--- /dev/null
++++ b/keyhandler/src/com/cyanogenmod/settings/device/KeyHandler.java
+@@ -0,0 +1,75 @@
++package com.cyanogenmod.settings.device;
++
++import android.app.ActivityManagerNative;
++import android.content.ActivityNotFoundException;
++import android.content.BroadcastReceiver;
++import android.content.Context;
++import android.content.Intent;
++import android.content.IntentFilter;
++import android.os.PowerManager;
++import android.os.SystemClock;
++import android.text.TextUtils;
++import android.view.KeyEvent;
++
++import com.android.internal.os.DeviceKeyHandler;
++import com.android.internal.widget.LockPatternUtils;
++
++public class KeyHandler implements DeviceKeyHandler {
++
++    private static final String TAG = KeyHandler.class.getSimpleName();
++
++    // Supported scancodes
++    private static final int KEY_DOUBLE_TAP = 68;
++
++    private Intent mPendingIntent;
++    private LockPatternUtils mLockPatternUtils;
++    private final Context mContext;
++    private final PowerManager mPowerManager;
++
++    public KeyHandler(Context context) {
++        mContext = context;
++        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
++        mLockPatternUtils = new LockPatternUtils(context);
++
++        IntentFilter filter = new IntentFilter();
++        filter.addAction(Intent.ACTION_USER_PRESENT);
++        filter.addAction(Intent.ACTION_SCREEN_OFF);
++        context.registerReceiver(mReceiver, filter);
++    }
++
++    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
++        @Override
++        public void onReceive(Context context, Intent intent) {
++            if (intent == null) {
++                return;
++            }
++            String action = intent.getAction();
++            if (TextUtils.equals(action, Intent.ACTION_USER_PRESENT)) {
++                if (mPendingIntent != null) {
++                    try {
++                        mContext.startActivity(mPendingIntent);
++                    } catch (ActivityNotFoundException e) {
++                    }
++                    mPendingIntent = null;
++                }
++            } else if (TextUtils.equals(action, Intent.ACTION_SCREEN_OFF)) {
++                mPendingIntent = null;
++            }
++        }
++    };
++
++
++    public boolean handleKeyEvent(KeyEvent event) {
++        boolean consumed = false;
++        switch(event.getScanCode()) {
++        case KEY_DOUBLE_TAP:
++            if (!mPowerManager.isScreenOn()) {
++                mPowerManager.wakeUp(SystemClock.uptimeMillis());
++            }
++            consumed = true;
++            break;
++        }
++        return consumed;
++    }
++
++}
+diff --git a/nx503a.mk b/nx503a.mk
+index 5a4e02c..524ab10 100644
+--- a/nx503a.mk
++++ b/nx503a.mk
+@@ -147,6 +147,10 @@ PRODUCT_COPY_FILES += \
+ PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/etc/sec_config:system/etc/sec_config
+ 
++# keyhandler
++PRODUCT_PACKAGES += \
++    com.cyanogenmod.keyhandler
++
+ # Keystore
+ PRODUCT_PACKAGES += \
+     keystore.msm8974
+@@ -310,10 +314,14 @@ PRODUCT_COPY_FILES += \
+ PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/usr/keylayout/Vendor_0a5c_Product_8502.kl:system/usr/keylayout/Vendor_0a5c_Product_8502.kl
+ 
+-# External key layouts
++# set_softkey.sh
+ PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/etc/set_softkey.sh:system/bin/set_softkey.sh
+ 
++# TP node
++PRODUCT_COPY_FILES += \
++    $(LOCAL_PATH)/etc/tp_node.sh:system/bin/tp_node.sh
++
+ # Camera2 API
+ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+     camera2.portability.force_api=1
+diff --git a/overlay/frameworks/base/core/res/res/values/config.xml b/overlay/frameworks/base/core/res/res/values/config.xml
+index 5944951..2bb116a 100644
+--- a/overlay/frameworks/base/core/res/res/values/config.xml
++++ b/overlay/frameworks/base/core/res/res/values/config.xml
+@@ -312,4 +312,12 @@
+     <!-- Is the device LTE capable -->
+     <bool name="config_lte_capable">false</bool>
+ 
++    <!-- The list absolute paths of jar/apk files containing the device specific handlers,
++         delimited by File.pathSeparator, which defaults to ":" on Android -->
++    <string name="config_deviceKeyHandlerLib" translatable="false">/system/framework/com.cyanogenmod.keyhandler.jar</string>
++
++    <!-- Full qualified name of the class that implements
++         com.android.internal.os.DeviceKeyHandler interface. -->
++    <string name="config_deviceKeyHandlerClass" translatable="false">com.cyanogenmod.settings.device.KeyHandler</string>
++
+ </resources>
+diff --git a/rootdir/etc/init.qcom.rc b/rootdir/etc/init.qcom.rc
+index 78f3af9..668b678 100644
+--- a/rootdir/etc/init.qcom.rc
++++ b/rootdir/etc/init.qcom.rc
+@@ -1024,6 +1024,21 @@ on property:persist.service.btcmd=1
+ on property:persist.service.btcmd=0
+     stop  btCommand
+ 
++# ADDED BY ZTEMT ZhuBing
++# start gesture process
++service gesture /system/bin/tmg3993
++    class main
++# ADDED BY ZTEMT ZhuBing END
++    
++# ZTEMT add by luochangyang 2014.02.11
++#This is for TP node.
++service tp_node /system/bin/sh /system/bin/tp_node.sh
++    class main
++    user root
++    group root
++    oneshot
++# ZTEMT END
++
+ service zte_addr_config /system/bin/zte_addr_config
+ 	class main
+ 
+-- 
+1.9.1
+

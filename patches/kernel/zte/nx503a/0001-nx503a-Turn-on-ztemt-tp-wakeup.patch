@@ -1,0 +1,39 @@
+From 05d1f7d8d3f9796750529c5995b618787fa05506 Mon Sep 17 00:00:00 2001
+From: BambooIV <ningdisheng@gmail.com>
+Date: Tue, 12 Apr 2016 15:04:03 +0800
+Subject: [PATCH] nx503a: Turn on ztemt tp wakeup
+
+---
+ drivers/input/touchscreen/cyttsp4/cyttsp4_core.c             | 2 +-
+ drivers/input/touchscreen/synaptics_dsx/synaptics_dsx_core.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/input/touchscreen/cyttsp4/cyttsp4_core.c b/drivers/input/touchscreen/cyttsp4/cyttsp4_core.c
+index be71127..de20ec3 100755
+--- a/drivers/input/touchscreen/cyttsp4/cyttsp4_core.c
++++ b/drivers/input/touchscreen/cyttsp4/cyttsp4_core.c
+@@ -55,7 +55,7 @@
+ #include <linux/earlysuspend.h>
+ #endif
+ 
+-#define ZTEMT_TP_WAKEUP_GESTURE_FUNCTION	0		//add by luochangyang
++#define ZTEMT_TP_WAKEUP_GESTURE_FUNCTION	1		//add by luochangyang
+ 
+ #define CY_CORE_REQUEST_EXCLUSIVE_TIMEOUT	500
+ #define CY_CORE_SLEEP_REQUEST_EXCLUSIVE_TIMEOUT	5000
+diff --git a/drivers/input/touchscreen/synaptics_dsx/synaptics_dsx_core.c b/drivers/input/touchscreen/synaptics_dsx/synaptics_dsx_core.c
+index d6b88e2..07ad899 100755
+--- a/drivers/input/touchscreen/synaptics_dsx/synaptics_dsx_core.c
++++ b/drivers/input/touchscreen/synaptics_dsx/synaptics_dsx_core.c
+@@ -82,7 +82,7 @@
+ #define NO_SLEEP_ON (1 << 2)
+ #define CONFIGURED (1 << 7)
+ 
+-#define ZTEMT_TP_WAKEUP_GESTURE_FUNCTION	0		//add by luochangyang
++#define ZTEMT_TP_WAKEUP_GESTURE_FUNCTION	1		//add by luochangyang
+ 
+ static int synaptics_rmi4_f12_set_enables(struct synaptics_rmi4_data *rmi4_data,
+ 		unsigned short ctrl28);
+-- 
+1.9.1
+

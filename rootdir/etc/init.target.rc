@@ -27,34 +27,37 @@
 #
 #
 
+# ZTEMT project customization
+#import init.rom.rc
+#import init.project.rc
+
 on early-init
     mkdir /firmware 0771 system system
     symlink /data/tombstones /tombstones
 #ADD by wuzehui for the custom file-system
     mkdir /custom 0755 radio radio
 
-# import cne init file
-on post-fs
-    export LD_PRELOAD /vendor/lib/libNimsWrap.so
+on init
+    # Set the property to indicate type of virtual display to 0
+    # 0 indicates that virtual display is not a Wifi display and that the
+    # session is not exercised through RemoteDisplay in the android framework
+    setprop persist.sys.wfd.virtual 0
 
 on fs
     mount_all fstab.qcom
-	
+
+    # Keeping following partitions outside fstab file. As user may not have
+    # these partition flashed on the device. Failure to mount any partition in fstab file
+    # results in failure to launch late-start class.
+
+    restorecon_recursive   /persist
+    mkdir /persist/data 0700 system system
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
 
 #ADD by wuzehui for the custom file-system
     wait /dev/block/platform/msm_sdcc.1/by-name/customfs
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/customfs /custom nosuid nodev barrier=1
-     
-    chown system radio /dev/block/platform/msm_sdcc.1/by-name
-    chmod 0775 /dev/block/platform/msm_sdcc.1/by-name
-    mount ext4 /dev/block/mmcblk0p14 /system remount rw barrier=1
-    exec /system/bin/sh /system/etc/init.qcom.modem_links.sh
-    mount ext4 /dev/block/mmcblk0p14 /system remount ro barrier=1
-
-    write /sys/kernel/boot_adsp/boot 1
-    setprop qcom.audio.init complete
-    
-
 on post-fs-data
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
@@ -69,11 +72,16 @@ on post-fs-data
     chown radio radio /custom/poweroff_ring
 
 on boot
-    start imsqmidaemon
     insmod /system/lib/modules/adsprpc.ko
-
-    # Tuxera exFAT kernel module
-    insmod /system/lib/modules/texfat.ko
+# access permission for secure touch
+    chmod 0660 /sys/devices/f9923000.i2c/i2c-1/1-004a/secure_touch_enable
+    chmod 0440 /sys/devices/f9923000.i2c/i2c-1/1-004a/secure_touch
+    chown system drmrpc /sys/devices/f9923000.i2c/i2c-1/1-004a/secure_touch_enable
+    chown system drmrpc /sys/devices/f9923000.i2c/i2c-1/1-004a/secure_touch
+    chmod 0660 /sys/devices/f9924000.i2c/i2c-2/2-004a/secure_touch_enable
+    chmod 0440 /sys/devices/f9924000.i2c/i2c-2/2-004a/secure_touch
+    chown system drmrpc /sys/devices/f9924000.i2c/i2c-2/2-004a/secure_touch_enable
+    chown system drmrpc /sys/devices/f9924000.i2c/i2c-2/2-004a/secure_touch
 
 # Allow usb charging to be disabled persistently
 on property:persist.usb.chgdisabled=1
@@ -95,9 +103,9 @@ on property:bluetooth.hsic_ctrl=unbind_hsic
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
-    class main
+    class late_start
     user camera
-    group camera system inet input graphics radio sdcard_rw sdcard_r media_rw shell log
+    group camera system inet input graphics
 
 #start gesture server as daemon
 service qgesturesvr /system/bin/mm-gesture-daemon
@@ -143,7 +151,20 @@ service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
 service thermal-engine /system/bin/thermal-engine
    class main
    user root
+   socket thermal-send-client stream 0666 system system
+   socket thermal-recv-client stream 0660 system system
+   socket thermal-recv-passive-client stream 0666 system system
    group root
+
+#disable security-check1, case 01613900 and case 01626540
+service security-check1 /sbin/security_boot_check system
+    class core
+    disabled
+
+#disable security-check2, case 01613900 and case 01626540
+service security-check2 /sbin/security_boot_check recovery
+    class core
+    disabled
 
 service time_daemon /system/bin/time_daemon
    class late_start
@@ -160,12 +181,50 @@ service audiod /system/bin/audiod
    user system
    group system
 
+service usf_tester /system/bin/usf_tester
+    user system
+    group system inet
+    disabled
+
+service usf_epos /system/bin/usf_epos
+    user system
+    group system inet
+    disabled
+
+service usf_gesture /system/bin/usf_gesture
+    user system
+    group system inet
+    disabled
+
+service usf_p2p /system/bin/usf_p2p
+    user system
+    group system inet
+    disabled
+
+service usf_hovering /system/bin/usf_hovering
+    user system
+    group system inet
+    disabled
+
+service usf_proximity /system/bin/usf_proximity
+    user system
+    group system inet
+    disabled
+
+service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+
+on property:init.svc.bootanim=stopped
+    start usf-post-boot
+
 service imsqmidaemon /system/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
     group ims radio net_raw log qcom_diag
-    disabled
 
 service imsdatadaemon /system/bin/imsdatadaemon
     class main
@@ -195,6 +254,7 @@ on property:sys.ims.DATA_DAEMON_STATUS=1
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
+    disabled
     user system
     socket pps stream 0660 system system
     group system graphics
@@ -202,8 +262,20 @@ service ppd /system/bin/mm-pp-daemon
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
+on property:init.svc.surfaceflinger=running
+    start ppd
+
 service nqs /system/bin/nqs
     class late_start
     socket nqs_qsb_comm stream 660 system system
     user system
     group drmrpc
+
+service set_softkey /system/bin/set_softkey.sh
+    class main
+    user root
+    group root
+    oneshot
+
+on property:softkey.change=1
+    start set_softkey
