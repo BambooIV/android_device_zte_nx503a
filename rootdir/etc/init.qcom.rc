@@ -38,6 +38,9 @@ on init
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
+    
+    # Support legacy libs
+    symlink /system/vendor/lib/egl /egl
 
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
