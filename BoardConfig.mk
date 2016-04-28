@@ -57,7 +57,7 @@ TARGET_BOARD_INFO_FILE := $(LOCAL_PATH)/board-info.txt
 # Kernel
 DTS_NAME := msm8974-v2.2-mtp-NX503A
 BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=23 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=disabled
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=23 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -95,9 +95,9 @@ BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 BOARD_BLUEDROID_VENDOR_CONF := device/zte/nx503a/bluetooth/libbt_vndcfg.txt
 
 # Camera
-TARGET_USE_COMPAT_GRALLOC_ALIGN := true
 USE_DEVICE_SPECIFIC_CAMERA := true
-COMMON_GLOBAL_CFLAGS += -DOPPO_CAMERA_HARDWARE -DCAMERA_VENDOR_L_COMPAT
+COMMON_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
+TARGET_USE_COMPAT_GRALLOC_ALIGN := true
 
 # Charger
 BOARD_CHARGER_SHOW_PERCENTAGE := true
@@ -198,15 +198,15 @@ TARGET_NO_RPC := true
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
-
-BOARD_SEPOLICY_DIRS += \
-        $(LOCAL_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS += device/zte/nx503a/sepolicy
 
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 23
 
 # Wifi
+BOARD_HAS_QCOM_WLAN := true
+BOARD_HAS_QCOM_WLAN_SDK := true
 BOARD_NO_WIFI_HAL := true
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WLAN_DEVICE           := bcmdhd
@@ -218,3 +218,11 @@ WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_AP      := "/etc/firmware/bcm4339/fw_bcmdhd_apsta.bin"
 WIFI_DRIVER_FW_PATH_STA     := "/etc/firmware/bcm4339/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_P2P     := "/etc/firmware/bcm4339/fw_bcmdhd_p2p.bin"
+TARGET_USES_WCNSS_CTRL := true
+TARGET_USES_QCOM_WCNSS_QMI := true
+TARGET_PROVIDES_WCNSS_QMI := true
+
+# dex-preoptimization to speed up first boot sequence
+WITH_DEXPREOPT := false
+
+SKIP_BOOT_JARS_CHECK := true
