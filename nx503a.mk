@@ -151,15 +151,6 @@ PRODUCT_PACKAGES += \
     libnl_2 \
     libbson
 
-# Filesystem
-PRODUCT_PACKAGES += \
-    e2fsck \
-    fibmap.f2fs \
-    fsck.f2fs \
-    mkfs.f2fs \
-    make_ext4fs \
-    resize2fs
-
 # LOWI
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/lowi.conf:system/etc/lowi.conf
