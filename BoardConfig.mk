@@ -144,9 +144,6 @@ TARGET_INIT_VENDOR_LIB := libinit_msm
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
-# Override healthd HAL
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.msm
-
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true
