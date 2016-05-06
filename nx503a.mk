@@ -104,6 +104,7 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
+    libqcomvoiceprocessingdescriptors \
     tinymix
 
 # Audio configuration
@@ -188,6 +189,17 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw
+    
+# Compatibility with older blobs
+PRODUCT_PACKAGES += \
+    libstlport
+    
+# Extended media support
+PRODUCT_PACKAGES += \
+    qcmediaplayer
+
+PRODUCT_BOOT_JARS += \
+    qcmediaplayer
 
 # Power
 PRODUCT_PACKAGES += \
@@ -316,7 +328,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/keylayout/Vendor_0a5c_Product_8502.kl:system/usr/keylayout/Vendor_0a5c_Product_8502.kl
 
-# set_softkey
+#set_softkey
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/set_softkey.sh:system/bin/set_softkey.sh
 
