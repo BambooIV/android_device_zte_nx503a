@@ -142,6 +142,9 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_msm
 
+# Keylayout
+PRODUCT_COPY_FILES := $(filter-out frameworks/base/data/keyboards/Generic.kl:system/usr/keylayout/Generic.kl , $(PRODUCT_COPY_FILES))
+
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
