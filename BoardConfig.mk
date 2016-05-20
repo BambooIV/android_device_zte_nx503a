@@ -137,6 +137,9 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
 
+# Keylayout
+PRODUCT_COPY_FILES := $(filter-out frameworks/base/data/keyboards/Generic.kl:system/usr/keylayout/Generic.kl , $(PRODUCT_COPY_FILES))
+
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
