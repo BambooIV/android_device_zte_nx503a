@@ -31,7 +31,6 @@ bin/usbhub_init
 bin/wdsdaemon
 bin/xtwifi-client
 bin/xtwifi-inet-agent
-bin/zte_addr_config
 
 # Etc
 etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb

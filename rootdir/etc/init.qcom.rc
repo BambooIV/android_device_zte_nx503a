@@ -1038,9 +1038,6 @@ on property:persist.service.btcmd=1
 on property:persist.service.btcmd=0
     stop  btCommand
 
-service zte_addr_config /system/bin/zte_addr_config
-	class main
-
 #ZTEMT ADD by mayu 2013-9-14 for lcd image enhance
 on property:persist.sys.image.enhance=w
     write /sys/kernel/lcd_enhance/saturation 24
