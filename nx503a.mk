@@ -151,10 +151,6 @@ PRODUCT_PACKAGES += \
     libnl_2 \
     libbson
 
-# HAL blob compatibility
-PRODUCT_PACKAGES += \
-    libstlport
-
 # LOWI
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/lowi.conf:system/etc/lowi.conf
