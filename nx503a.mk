@@ -72,10 +72,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/data/main.conf:system/etc/bluetooth/main.conf \
     $(LOCAL_PATH)/bluetooth/data/network.conf:system/etc/bluetooth/network.conf \
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # WiFi
