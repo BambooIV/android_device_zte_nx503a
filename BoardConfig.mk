@@ -170,7 +170,6 @@ TARGET_USERIMAGES_USE_EXT4 := true
 
 # RIL
 TARGET_RIL_VARIANT := caf
-BOARD_RIL_CLASS := ../../../device/zte/nx503a/ril/
 
 # RPC
 TARGET_NO_RPC := true
