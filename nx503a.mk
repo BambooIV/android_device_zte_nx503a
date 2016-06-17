@@ -336,7 +336,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.no_wait_for_card=1 \
-    persist.radio.apm_sim_not_pwdn=1
+    persist.radio.apm_sim_not_pwdn=1 \
+    persist.radio.add_power_save=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=2m
