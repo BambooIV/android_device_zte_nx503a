@@ -18,6 +18,9 @@ TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 TARGET_BOOTANIMATION_HALF_RES := true
 
+# Disable block-based ota
+BLOCK_BASED_OTA := false
+
 # Inherit device configuration
 $(call inherit-product, device/zte/nx503a/nx503a.mk)
 
