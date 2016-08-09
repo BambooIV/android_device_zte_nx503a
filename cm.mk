@@ -24,9 +24,6 @@ BLOCK_BASED_OTA := false
 # Inherit device configuration
 $(call inherit-product, device/zte/nx503a/nx503a.mk)
 
-# Enhanced NFC
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
-
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
