@@ -15,6 +15,7 @@ bin/irsc_util
 bin/ks
 bin/mm-qcamera-app
 bin/mm-qcamera-daemon
+bin/mpdecision
 bin/netmgrd
 bin/qmuxd
 bin/qseecomd
@@ -471,6 +472,7 @@ vendor/lib/liboemcamera.so
 vendor/lib/liboi_sbc_decoder.so
 vendor/lib/libprdrmdecrypt.so
 vendor/lib/libprofiler_msmadc.so
+vendor/lib/libqc-opt.so
 vendor/lib/libqcci_legacy.so
 vendor/lib/libqdi.so
 vendor/lib/libqdp.so
@@ -534,6 +536,7 @@ vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsutils.so
 vendor/lib/libidl.so
+vendor/lib/libqc-opt.so
 vendor/lib/libqcci_legacy.so
 vendor/lib/libqdi.so
 vendor/lib/libqdp.so
@@ -566,8 +569,3 @@ vendor/lib/libril-qc-qmi-1.so
 vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/libsystem_health_mon.so
 vendor/lib/libxml.so
-
-# Perf
-bin/mpdecision
-vendor/lib/libqti-perfd-client.so
-vendor/lib/libqc-opt.so
