@@ -835,6 +835,9 @@ service hcidump /system/bin/sh /system/etc/hcidump.sh
 service charger /charger
     class charger
 
+on charger
+    write /sys/class/leds/lcd-backlight/brightness 100
+
 service ssr_diag /system/bin/ssr_diag
     class late_start
     user system
