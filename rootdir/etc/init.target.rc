@@ -72,6 +72,7 @@ on post-fs-data
     chown radio radio /custom/poweroff_ring
 
 on boot
+    start rmt_storage
     insmod /system/lib/modules/adsprpc.ko
 # access permission for secure touch
     chmod 0660 /sys/devices/f9923000.i2c/i2c-1/1-004a/secure_touch_enable
