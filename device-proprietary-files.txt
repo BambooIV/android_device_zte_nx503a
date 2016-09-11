@@ -43,8 +43,7 @@ etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 etc/capability.xml
 etc/firmware/a330_pfp.fw
 etc/firmware/a330_pm4.fw
-etc/firmware/bcm4339/fw_bcmdhd_apsta.bin
-etc/firmware/bcm4339/fw_bcmdhd_p2p.bin
+etc/firmware/bcm4339/fw_bcmdhd_apsta.bin:etc/firmware/bcm4339/fw_bcmdhd.bin
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw

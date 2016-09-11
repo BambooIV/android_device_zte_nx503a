@@ -84,6 +84,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/p2p_supplicant.conf:system/etc/wifi/p2p_supplicant.conf \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
+include hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk
+
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
@@ -219,17 +221,22 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
-# Wifi
+# WiFi
 PRODUCT_PACKAGES += \
     libnetcmdiface \
-    crda \
-    regulatory.bin \
-    linville.key.pub.pem
-
-PRODUCT_PACKAGES += \
+    macloader \
     dhcpcd.conf \
     hostapd \
+    hostapd_default.conf \
+    libwpa_client \
     wpa_supplicant
+
+# Wifi direct
+PRODUCT_PACKAGES += \
+    crda \
+    regdbdump \
+    regulatory.bin \
+    linville.key.pub.pem
 
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
@@ -285,8 +292,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/quipc.conf:system/etc/quipc.conf \
     $(LOCAL_PATH)/configs/sap.conf:system/etc/sap.conf \
     $(LOCAL_PATH)/configs/usf_post_boot.sh:system/etc/usf_post_boot.sh \
-    $(LOCAL_PATH)/configs/xtwifi.conf:system/etc/xtwifi.conf \
-    $(LOCAL_PATH)/configs/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
+    $(LOCAL_PATH)/configs/xtwifi.conf:system/etc/xtwifi.conf
 
 # Key layouts and touchscreen
 PRODUCT_COPY_FILES += \

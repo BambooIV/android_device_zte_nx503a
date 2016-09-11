@@ -39,8 +39,4 @@ $(FIRMWARE_WCD9320_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_WCD9320_SYMLINKS)
 
-$(shell mkdir -p $(TARGET_OUT_ETC)/firmware/bcm4339; \
-        ln -sf fw_bcmdhd_apsta.bin\
-        $(TARGET_OUT_ETC)/firmware/bcm4339/fw_bcmdhd.bin )
-
 endif
