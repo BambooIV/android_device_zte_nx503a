@@ -2,7 +2,6 @@
 app/TimeService.apk
 
 # Bin
-bin/ATFWD-daemon
 bin/adsprpcd
 bin/btCommand
 bin/btnvtool
