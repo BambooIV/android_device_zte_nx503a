@@ -188,10 +188,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.msm8974
 
-# LibPower
-PRODUCT_PACKAGES += \
-    power.qcom
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
