@@ -141,6 +141,10 @@ PRODUCT_PACKAGES += \
     libshim_qc-opt \
     libshim_rmt_storage
 
+# Data
+PRODUCT_PACKAGES += \
+    librmnetctl
+
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8974 \
