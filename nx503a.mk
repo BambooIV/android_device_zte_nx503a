@@ -158,9 +158,20 @@ PRODUCT_PACKAGES += \
     libnl_2 \
     libbson
 
-# LOWI
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8974
+
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/lowi.conf:system/etc/lowi.conf
+    $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf \
+    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
+    $(LOCAL_PATH)/gps/quipc.conf:system/etc/quipc.conf \
+    $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf
+
+# IPC router config
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
 # IRSC
 PRODUCT_COPY_FILES += \
@@ -281,8 +292,6 @@ PRODUCT_PACKAGES += \
 
 # etc
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/flp.conf:system/etc/flp.conf \
-    $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/configs/hcidump.sh:system/etc/hcidump.sh \
     $(LOCAL_PATH)/configs/hsic.control.bt.sh:system/etc/hsic.control.bt.sh \
     $(LOCAL_PATH)/configs/init.ath3k.bt.sh:system/etc/init.ath3k.bt.sh \
@@ -296,13 +305,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
     $(LOCAL_PATH)/configs/init.qcom.sdio.sh:system/etc/init.qcom.sdio.sh \
     $(LOCAL_PATH)/configs/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
-    $(LOCAL_PATH)/configs/izat.conf:system/etc/izat.conf \
-    $(LOCAL_PATH)/configs/permissions/com.qualcomm.location.xml:system/etc/permissions/com.qualcomm.location.xml \
     $(LOCAL_PATH)/configs/qca6234-service.sh:system/etc/qca6234-service.sh \
-    $(LOCAL_PATH)/configs/quipc.conf:system/etc/quipc.conf \
-    $(LOCAL_PATH)/configs/sap.conf:system/etc/sap.conf \
-    $(LOCAL_PATH)/configs/usf_post_boot.sh:system/etc/usf_post_boot.sh \
-    $(LOCAL_PATH)/configs/xtwifi.conf:system/etc/xtwifi.conf
+    $(LOCAL_PATH)/configs/usf_post_boot.sh:system/etc/usf_post_boot.sh
 
 # Key layouts and touchscreen
 PRODUCT_COPY_FILES += \

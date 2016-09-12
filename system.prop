@@ -172,10 +172,7 @@ persist.sys.ap.restart_level=0
 ro.bt.bdaddr_path=/persist/.bt_nv.bin
 
 # GPS
-ro.qc.sdk.izat.premium_enabled=0
-ro.qc.sdk.izat.service_mask=0x0
-persist.gps.qc_nlp_in_use=0
-#persist.loc.nlp_name=com.qualcomm.services.location
+persist.gps.qc_nlp_in_use=1
 ro.gps.agps_provider=1
 
 # By default, primary storage is physical
