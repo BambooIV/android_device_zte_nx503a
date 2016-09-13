@@ -1,0 +1,5 @@
+allow mm-qcamerad system_data_file:dir add_name;
+allow mm-qcamerad system_data_file:dir remove_name;
+allow mm-qcamerad system_data_file:dir write;
+allow mm-qcamerad system_data_file:sock_file unlink;
+

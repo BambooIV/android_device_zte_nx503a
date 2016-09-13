@@ -177,7 +177,7 @@ TARGET_NO_RPC := true
 include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
-        $(LOCAL_PATH)/sepolicy
+    $(LOCAL_PATH)/sepolicy
 
 # Wifi
 BOARD_NO_WIFI_HAL := true

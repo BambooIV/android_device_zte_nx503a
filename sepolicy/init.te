@@ -1,0 +1,3 @@
+allow init init:socket read;
+allow init init:socket write;
+allow init thermal_device:chr_file ioctl;

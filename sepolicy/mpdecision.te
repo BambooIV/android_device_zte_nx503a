@@ -1,0 +1,3 @@
+allow mpdecision socket_device:sock_file setattr;
+allow mpdecision socket_device:sock_file write;
+allow mpdecision system_data_file:file open;
