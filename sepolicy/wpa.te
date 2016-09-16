@@ -1,2 +1,0 @@
-allow wpa persist_file:file open;
-allow wpa persist_file:file read;
