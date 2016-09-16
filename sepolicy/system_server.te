@@ -1,3 +1,0 @@
-allow system_server persist_file:file open;
-allow system_server persist_file:file read;
-allow system_server proc:file write;
