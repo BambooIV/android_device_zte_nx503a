@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-#include <healthd.h>
+#include <healthd/healthd.h>
 #include "minui/minui.h"
 #include <fcntl.h>
 
