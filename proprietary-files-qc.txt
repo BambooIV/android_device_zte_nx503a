@@ -82,6 +82,12 @@ vendor/lib/libscale.so
 etc/firmware/a330_pfp.fw
 etc/firmware/a330_pm4.fw
 
+# Listen service
+vendor/lib/liblistenhardware.so
+vendor/lib/liblistenjni.so
+-vendor/lib/liblisten.so
+vendor/lib/liblistensoundmodel.so
+
 # Media
 vendor/lib/libDivxDrm.so
 vendor/lib/libI420colorconvert.so
