@@ -172,7 +172,7 @@ persist.sys.ap.restart_level=0
 ro.bt.bdaddr_path=/persist/.bt_nv.bin
 
 # GPS
-persist.gps.qc_nlp_in_use=1
+persist.gps.qc_nlp_in_use=0
 ro.gps.agps_provider=1
 
 # By default, primary storage is physical
