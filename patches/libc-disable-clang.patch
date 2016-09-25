@@ -1,0 +1,15 @@
+
+project bionic/
+diff --git a/bionic/libc/Android.mk b/bionic/libc/Android.mk
+index e8775ae..a134cd3 100644
+--- a/bionic/libc/Android.mk
++++ b/bionic/libc/Android.mk
+@@ -1097,7 +1097,7 @@ LOCAL_CONLYFLAGS := $(libc_common_conlyflags)
+ LOCAL_CPPFLAGS := $(libc_common_cppflags) -Wold-style-cast
+ LOCAL_C_INCLUDES := $(libc_common_c_includes)
+ LOCAL_MODULE := libc_pthread
+-LOCAL_CLANG := $(use_clang)
++LOCAL_CLANG := false
+ LOCAL_ADDITIONAL_DEPENDENCIES := $(libc_common_additional_dependencies)
+ LOCAL_CXX_STL := none
+ LOCAL_SYSTEM_SHARED_LIBRARIES :=
