@@ -89,6 +89,9 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 # CM Hardware
 BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/
 
+# Disable clang
+TARGET_BIONIC_DISABLE_CLANG := true
+
 # Disable memcpy_base.S optimization
 TARGET_CPU_MEMCPY_BASE_OPT_DISABLE := true
 
