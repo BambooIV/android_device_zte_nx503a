@@ -139,6 +139,9 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 # Keylayout
 PRODUCT_COPY_FILES := $(filter-out frameworks/base/data/keyboards/Generic.kl:system/usr/keylayout/Generic.kl , $(PRODUCT_COPY_FILES))
 
+# Libc
+TARGET_NEEDS_GCC_LIBC := true
+
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
