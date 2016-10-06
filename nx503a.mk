@@ -123,6 +123,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+    libcamera_client \
     libxml2 \
     camera.msm8974 \
     Snap
