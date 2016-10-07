@@ -56,9 +56,6 @@ TARGET_KERNEL_CONFIG := msm8974-NX503A_defconfig
 TARGET_ZTEMT_DTS := true
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 
-# Added to indicate that protobuf-c is supported in this build
-PROTOBUF_SUPPORTED := true
-
 # Assert
 TARGET_OTA_ASSERT_DEVICE := NX503A,nx503a,Z5S,z5s,NX503AJ,nx503aj,Z5SN,z5sn
 
