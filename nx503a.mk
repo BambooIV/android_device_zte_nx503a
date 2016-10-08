@@ -125,8 +125,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libcamera_client \
     libxml2 \
-    camera.msm8974 \
-    Snap
+    camera.msm8974
     
 # Connectivity Engine support
 PRODUCT_PACKAGES += \
