@@ -140,8 +140,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libboringssl-compat \
     libshim_qc-opt \
-    libshim_rmt_storage \
-    libshim_thermal
+    libshim_rmt_storage
 
 # Data
 PRODUCT_PACKAGES += \
