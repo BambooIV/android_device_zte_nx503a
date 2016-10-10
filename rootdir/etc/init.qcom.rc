@@ -179,14 +179,6 @@ on post-fs-data
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
-    # Create directory used by sensor subsystem
-    mkdir /persist/sensors 0775 system root
-    write /persist/sensors/sensors_settings 1
-    chmod 0644 /persist/sensors/sensors_settings
-    chown system root /persist/sensors/sensors_settings
-    mkdir /data/misc/sensors 0775 system system
-    restorecon_recursive /data/misc/sensors
-
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -265,6 +257,11 @@ on post-fs-data
     chown system system /sys/class/leds/red/brightness
 
 # ADDED BY ZTEMT ZhuBing
+# add the sensor sysfs permission
+    mkdir /persist/sensors 0775 system system
+    write /persist/sensors/sensors_settings 1
+    chown system system /persist/sensors/sensors_settings
+    chmod 664 /persist/sensors/sensors_settings
 
 	#gesture
     chown system system /sys/class/gesture/gesture/enable
