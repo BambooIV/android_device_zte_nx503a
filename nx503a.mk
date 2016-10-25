@@ -239,6 +239,7 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.target.rc \
+    tp_node.sh \
     ueventd.qcom.rc
 
 # Telephony-ext

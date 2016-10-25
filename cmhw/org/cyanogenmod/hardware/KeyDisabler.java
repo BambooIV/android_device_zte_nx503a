@@ -30,7 +30,7 @@ import java.io.File;
 
 public class KeyDisabler {
 
-    private static String CONTROL_PATH = "/proc/touchpanel/keypad_enable";
+    private static String CONTROL_PATH = "/data/tp/keypad_enable";
 
     public static boolean isSupported() {
         return new File(CONTROL_PATH).exists();
