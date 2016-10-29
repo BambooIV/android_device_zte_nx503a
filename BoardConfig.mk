@@ -85,6 +85,7 @@ TARGET_USE_COMPAT_GRALLOC_ALIGN := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Charger
+BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
@@ -146,9 +147,6 @@ TARGET_NEEDS_GCC_LIBC := true
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
-
-# Override healthd HAL
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.msm
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true

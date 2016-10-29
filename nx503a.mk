@@ -131,10 +131,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libcnefeatureconfig
 
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images
-
 # Compatibility
 PRODUCT_PACKAGES += \
     libboringssl-compat \
