@@ -387,8 +387,6 @@ on property:wifi.change_nv_owner=1
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-    # Temp hack to fix torch not being registered on boot
-    restart media
 
 # corefile limit and ETB enabling
 on property:persist.debug.trace=1
