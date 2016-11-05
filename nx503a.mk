@@ -149,6 +149,10 @@ PRODUCT_PACKAGES += \
     memtrack.msm8974 \
     liboverlay 
 
+# DRM
+PRODUCT_PACKAGES += \
+    libshim_wvm
+
 # Ebtables
 PRODUCT_PACKAGES += \
     ebtables \
