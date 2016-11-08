@@ -1,0 +1,6 @@
+allow qti_init_shell sysfs_battery_supply:dir search;
+allow qti_init_shell sysfs_battery_supply:dir setattr;
+allow qti_init_shell sysfs_battery_supply:file getattr;
+allow qti_init_shell system_data_file:lnk_file create;
+allow qti_init_shell system_data_file:lnk_file unlink;
+allow qti_init_shell sysfs_devices_system_cpu:file setattr;
