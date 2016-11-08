@@ -57,6 +57,10 @@ media.aac_51_output_enabled=true
 # Default to AwesomePlayer
 media.stagefright.use-awesome=true
 
+# Media
+media.stagefright.legacyencoder=true
+media.stagefright.less-secure=true
+
 # VIDC: debug_levels
 # 1:ERROR 2:HIGH 4:LOW 0:NOLOGS 7:AllLOGS
 vidc.debug.level=1
